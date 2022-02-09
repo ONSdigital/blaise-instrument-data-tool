@@ -31,7 +31,7 @@ Add the following to the file:
 <packageSourceCredentials>
    <<source_name>>
       <add key="Username" value="<username>" />
-      <add key="ClearTextPassword" value="<password>" />
+      <add key="ClearTextPassword" value="<pat>" />
    </<source_name>>
 </packageSourceCredentials>
 ```
