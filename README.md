@@ -15,7 +15,7 @@ To add the feed in Visual Studio:
 
 * Menu navigation - Tools > Options > NuGet Package Manager > Package Sources
 * Press the plus button to add a new source
-* Enter a name and put in the source feed URL - https://pkgs.dev.azure.com/<org>/<proj>/_packaging/<feed>/nuget/v3/index.json
+* Enter a name and put in the source feed URL - `https://pkgs.dev.azure.com/<org>/<proj>/_packaging/<feed>/nuget/v3/index.json`
 
 To put your PAT details into your NuGet configuration file:
 
