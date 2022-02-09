@@ -1,7 +1,7 @@
 
 # Blaise Instrument Data Tool
 
-A tool to make it easier to load data into a Blaise questionnaire instrument deployed into our Cloud based environment.
+A Windows Forms UI based tool to make it easier to load data into a Blaise questionnaire instrument deployed into our cloud based environment.
 
 ## Setup
 
@@ -15,7 +15,7 @@ To add the feed in Visual Studio:
 
 * Menu navigation - Tools > Options > NuGet Package Manager > Package Sources
 * Press the plus button to add a new source
-* Enter a name and put in the source feed URL - `https://pkgs.dev.azure.com/<org>/<proj>/_packaging/<feed>/nuget/v3/index.json`
+* Enter a name and put in the source feed URL - `https://pkgs.dev.azure.com/<ORG>/<PROJ>/_packaging/<FEED>/nuget/v3/index.json`
 
 To put your PAT details into your NuGet configuration file:
 
@@ -29,12 +29,20 @@ Add the following to the file:
 
 ```
 <packageSourceCredentials>
-   <<source_name>>
-      <add key="Username" value="<username>" />
-      <add key="ClearTextPassword" value="<pat>" />
-   </<source_name>>
+   <<SOURCE_NAME>>
+      <add key="Username" value="<USERNAME>" />
+      <add key="ClearTextPassword" value="<PAT>" />
+   </<SOURCE_NAME>>
 </packageSourceCredentials>
 ```
 
 ## Usage
 
+* Start the application in Visual Studio to launch the Windows Forms UI.
+* Enter the Blaise connection details in the fields provided.
+* Click the Refresh button and the available server parks and instruments should be populated.
+* Select the desired server park and instrument.
+* Set the start primary key and how many cases you would like created.
+* Click the Create button to start creating cases.
+
+Certain fields such as `QDataBag.TelNo` will always be populated. You can populate any fields you like by providing a case sample is JSON format. An example is provided in the repo, see the `DummySampleData.json` file.
