@@ -8,11 +8,14 @@
     ,"qdatabag.samptitle": "blah"
     ,"qdatabag.sampfname": "blah"
     ,"qdatabag.sampsname": "blah"
-    ,"qdatabag.name": "blah"
+    ,"qdatabag.name": "blah",
+	,"qdatabag.TelNo": "07000000000",
+    ,"qdatabag.TelNo2": "07000000000"	
     ,"qsample.orgname": "blah"
     ,"qsample.address1": "blah"
     ,"qsample.address2": "blah"
     ,"qsample.locality": "blah"
     ,"qsample.townname": "blah"
-    ,"qsample.postcode": "blah"
+    ,"qsample.postcode": "blah",
+	,"qsample.TelNo": "07000000000"
 }

@@ -1,7 +1,7 @@
 
-# Blaise Instrument Data Tool
+# Blaise Questionnaire Data Tool
 
-A Windows Forms UI based tool to make it easier to load data into a Blaise questionnaire instrument deployed into our cloud based environment.
+A Windows Forms UI based tool to make it easier to load data into a Blaise questionnaire questionnaire deployed into our cloud based environment.
 
 ## Setup
 
@@ -40,8 +40,8 @@ Add the following to the file:
 
 * Start the application in Visual Studio to launch the Windows Forms UI.
 * Enter the Blaise connection details in the fields provided.
-* Click the Refresh button and the available server parks and instruments should be populated.
-* Select the desired server park and instrument.
+* Click the Refresh button and the available server parks and questionnaires should be populated.
+* Select the desired server park and questionnaire.
 * Set the start primary key and how many cases you would like created.
 * Click the Create button to start creating cases.
 

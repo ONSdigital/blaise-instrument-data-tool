@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Instrument.Data.Gui", "Blaise.Instrument.Data.Gui\Blaise.Instrument.Data.Gui.csproj", "{19BB55C8-5193-4882-8BAC-5CCE18C49D4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Questionnaire.Data.Gui", "Blaise.Questionnaire.Data.Gui\Blaise.Questionnaire.Data.Gui.csproj", "{19BB55C8-5193-4882-8BAC-5CCE18C49D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Instrument.Data.Helpers", "Blaise.Instrument.Data.Helpers\Blaise.Instrument.Data.Helpers.csproj", "{078C277A-F48B-4565-A198-203005C7EDDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Questionnaire.Data.Helpers", "Blaise.Questionnaire.Data.Helpers\Blaise.Questionnaire.Data.Helpers.csproj", "{078C277A-F48B-4565-A198-203005C7EDDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

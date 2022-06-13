@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Blaise.Instrument.Data.Gui.Extensions
+namespace Blaise.Questionnaire.Data.Gui.Extensions
 {
     public static class FormExtensions
     {

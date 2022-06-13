@@ -1,5 +1,5 @@
 ﻿
-namespace Blaise.Instrument.Data.Gui
+namespace Blaise.Questionnaire.Data.Gui
 {
     partial class BlaiseDataTool
     {
@@ -29,9 +29,9 @@ namespace Blaise.Instrument.Data.Gui
         /// </summary>
         private void InitializeComponent()
         {
-            this.InstrumentFileTextBox = new System.Windows.Forms.TextBox();
-            this.instrumentFileLabel = new System.Windows.Forms.Label();
-            this.BrowseInstrumentFile = new System.Windows.Forms.Button();
+            this.QuestionnaireFileTextBox = new System.Windows.Forms.TextBox();
+            this.questionnaireFileLabel = new System.Windows.Forms.Label();
+            this.BrowseQuestionnaireFile = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.numberOfCasesLabel = new System.Windows.Forms.Label();
             this.NumberOfCasesTextBox = new System.Windows.Forms.TextBox();
@@ -51,16 +51,16 @@ namespace Blaise.Instrument.Data.Gui
             this.caseDetailsLabel = new System.Windows.Forms.Label();
             this.connectionSettings = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.InstallInstrumentButton = new System.Windows.Forms.Button();
+            this.InstallQuestionnaireButton = new System.Windows.Forms.Button();
             this.TestConnectionButton = new System.Windows.Forms.Button();
             this.BrowseCaseFileButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.CaseSampleFileTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.InstallInstrumentLabel = new System.Windows.Forms.Label();
+            this.InstallQuestionnaireLabel = new System.Windows.Forms.Label();
             this.ServerParkDropDown = new System.Windows.Forms.ComboBox();
-            this.RefreshInstrumentsButton = new System.Windows.Forms.Button();
-            this.InstrumentDropDown = new System.Windows.Forms.ComboBox();
+            this.RefreshQuestionnairesButton = new System.Windows.Forms.Button();
+            this.QuestionnaireDropDown = new System.Windows.Forms.ComboBox();
             this.PortLabel = new System.Windows.Forms.Label();
             this.PortTextBox = new System.Windows.Forms.TextBox();
             this.RemotePortLabel = new System.Windows.Forms.Label();
@@ -69,34 +69,34 @@ namespace Blaise.Instrument.Data.Gui
             this.SelectServerparkLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // InstrumentFileTextBox
+            // QuestionnaireFileTextBox
             // 
-            this.InstrumentFileTextBox.Location = new System.Drawing.Point(151, 438);
-            this.InstrumentFileTextBox.Name = "InstrumentFileTextBox";
-            this.InstrumentFileTextBox.Size = new System.Drawing.Size(265, 20);
-            this.InstrumentFileTextBox.TabIndex = 0;
+            this.QuestionnaireFileTextBox.Location = new System.Drawing.Point(151, 438);
+            this.QuestionnaireFileTextBox.Name = "QuestionnaireFileTextBox";
+            this.QuestionnaireFileTextBox.Size = new System.Drawing.Size(265, 20);
+            this.QuestionnaireFileTextBox.TabIndex = 0;
             // 
-            // instrumentFileLabel
+            // questionnaireFileLabel
             // 
-            this.instrumentFileLabel.AutoSize = true;
-            this.instrumentFileLabel.Location = new System.Drawing.Point(29, 441);
-            this.instrumentFileLabel.Name = "instrumentFileLabel";
-            this.instrumentFileLabel.Size = new System.Drawing.Size(101, 13);
-            this.instrumentFileLabel.TabIndex = 1;
-            this.instrumentFileLabel.Text = "Instrument package";
+            this.questionnaireFileLabel.AutoSize = true;
+            this.questionnaireFileLabel.Location = new System.Drawing.Point(29, 441);
+            this.questionnaireFileLabel.Name = "questionnaireFileLabel";
+            this.questionnaireFileLabel.Size = new System.Drawing.Size(101, 13);
+            this.questionnaireFileLabel.TabIndex = 1;
+            this.questionnaireFileLabel.Text = "Questionnaire package";
             // 
-            // BrowseInstrumentFile
+            // BrowseQuestionnaireFile
             // 
-            this.BrowseInstrumentFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseInstrumentFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BrowseInstrumentFile.Location = new System.Drawing.Point(424, 436);
-            this.BrowseInstrumentFile.Name = "BrowseInstrumentFile";
-            this.BrowseInstrumentFile.Size = new System.Drawing.Size(35, 22);
-            this.BrowseInstrumentFile.TabIndex = 2;
-            this.BrowseInstrumentFile.Text = "...";
-            this.BrowseInstrumentFile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BrowseInstrumentFile.UseVisualStyleBackColor = true;
-            this.BrowseInstrumentFile.Click += new System.EventHandler(this.Browse_Click);
+            this.BrowseQuestionnaireFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseQuestionnaireFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.BrowseQuestionnaireFile.Location = new System.Drawing.Point(424, 436);
+            this.BrowseQuestionnaireFile.Name = "BrowseQuestionnaireFile";
+            this.BrowseQuestionnaireFile.Size = new System.Drawing.Size(35, 22);
+            this.BrowseQuestionnaireFile.TabIndex = 2;
+            this.BrowseQuestionnaireFile.Text = "...";
+            this.BrowseQuestionnaireFile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.BrowseQuestionnaireFile.UseVisualStyleBackColor = true;
+            this.BrowseQuestionnaireFile.Click += new System.EventHandler(this.Browse_Click);
             // 
             // openFileDialog
             // 
@@ -151,7 +151,7 @@ namespace Blaise.Instrument.Data.Gui
             this.imstrumentNameLabel.Name = "imstrumentNameLabel";
             this.imstrumentNameLabel.Size = new System.Drawing.Size(85, 13);
             this.imstrumentNameLabel.TabIndex = 15;
-            this.imstrumentNameLabel.Text = "Instrument name";
+            this.imstrumentNameLabel.Text = "Questionnaire name";
             // 
             // serverParkLabel
             // 
@@ -261,15 +261,15 @@ namespace Blaise.Instrument.Data.Gui
             this.label1.Size = new System.Drawing.Size(450, 2);
             this.label1.TabIndex = 35;
             // 
-            // InstallInstrumentButton
+            // InstallQuestionnaireButton
             // 
-            this.InstallInstrumentButton.Location = new System.Drawing.Point(151, 482);
-            this.InstallInstrumentButton.Name = "InstallInstrumentButton";
-            this.InstallInstrumentButton.Size = new System.Drawing.Size(94, 29);
-            this.InstallInstrumentButton.TabIndex = 36;
-            this.InstallInstrumentButton.Text = "Install";
-            this.InstallInstrumentButton.UseVisualStyleBackColor = true;
-            this.InstallInstrumentButton.Click += new System.EventHandler(this.InstallInstrumentButton_Click);
+            this.InstallQuestionnaireButton.Location = new System.Drawing.Point(151, 482);
+            this.InstallQuestionnaireButton.Name = "InstallQuestionnaireButton";
+            this.InstallQuestionnaireButton.Size = new System.Drawing.Size(94, 29);
+            this.InstallQuestionnaireButton.TabIndex = 36;
+            this.InstallQuestionnaireButton.Text = "Install";
+            this.InstallQuestionnaireButton.UseVisualStyleBackColor = true;
+            this.InstallQuestionnaireButton.Click += new System.EventHandler(this.InstallQuestionnaireButton_Click);
             // 
             // TestConnectionButton
             // 
@@ -320,15 +320,15 @@ namespace Blaise.Instrument.Data.Gui
             this.label4.Size = new System.Drawing.Size(450, 2);
             this.label4.TabIndex = 41;
             // 
-            // InstallInstrumentLabel
+            // InstallQuestionnaireLabel
             // 
-            this.InstallInstrumentLabel.AutoSize = true;
-            this.InstallInstrumentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InstallInstrumentLabel.Location = new System.Drawing.Point(31, 400);
-            this.InstallInstrumentLabel.Name = "InstallInstrumentLabel";
-            this.InstallInstrumentLabel.Size = new System.Drawing.Size(103, 13);
-            this.InstallInstrumentLabel.TabIndex = 42;
-            this.InstallInstrumentLabel.Text = "Install instrument";
+            this.InstallQuestionnaireLabel.AutoSize = true;
+            this.InstallQuestionnaireLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstallQuestionnaireLabel.Location = new System.Drawing.Point(31, 400);
+            this.InstallQuestionnaireLabel.Name = "InstallQuestionnaireLabel";
+            this.InstallQuestionnaireLabel.Size = new System.Drawing.Size(103, 13);
+            this.InstallQuestionnaireLabel.TabIndex = 42;
+            this.InstallQuestionnaireLabel.Text = "Install questionnaire";
             // 
             // ServerParkDropDown
             // 
@@ -339,24 +339,24 @@ namespace Blaise.Instrument.Data.Gui
             this.ServerParkDropDown.Size = new System.Drawing.Size(308, 21);
             this.ServerParkDropDown.TabIndex = 43;
             // 
-            // RefreshInstrumentsButton
+            // RefreshQuestionnairesButton
             // 
-            this.RefreshInstrumentsButton.Location = new System.Drawing.Point(153, 221);
-            this.RefreshInstrumentsButton.Name = "RefreshInstrumentsButton";
-            this.RefreshInstrumentsButton.Size = new System.Drawing.Size(100, 29);
-            this.RefreshInstrumentsButton.TabIndex = 44;
-            this.RefreshInstrumentsButton.Text = "Refresh";
-            this.RefreshInstrumentsButton.UseVisualStyleBackColor = true;
-            this.RefreshInstrumentsButton.Click += new System.EventHandler(this.RefreshInstrumentsButton_Click);
+            this.RefreshQuestionnairesButton.Location = new System.Drawing.Point(153, 221);
+            this.RefreshQuestionnairesButton.Name = "RefreshQuestionnairesButton";
+            this.RefreshQuestionnairesButton.Size = new System.Drawing.Size(100, 29);
+            this.RefreshQuestionnairesButton.TabIndex = 44;
+            this.RefreshQuestionnairesButton.Text = "Refresh";
+            this.RefreshQuestionnairesButton.UseVisualStyleBackColor = true;
+            this.RefreshQuestionnairesButton.Click += new System.EventHandler(this.RefreshQuestionnairesButton_Click);
             // 
-            // InstrumentDropDown
+            // QuestionnaireDropDown
             // 
-            this.InstrumentDropDown.DropDownWidth = 300;
-            this.InstrumentDropDown.FormattingEnabled = true;
-            this.InstrumentDropDown.Location = new System.Drawing.Point(149, 611);
-            this.InstrumentDropDown.Name = "InstrumentDropDown";
-            this.InstrumentDropDown.Size = new System.Drawing.Size(308, 21);
-            this.InstrumentDropDown.TabIndex = 45;
+            this.QuestionnaireDropDown.DropDownWidth = 300;
+            this.QuestionnaireDropDown.FormattingEnabled = true;
+            this.QuestionnaireDropDown.Location = new System.Drawing.Point(149, 611);
+            this.QuestionnaireDropDown.Name = "QuestionnaireDropDown";
+            this.QuestionnaireDropDown.Size = new System.Drawing.Size(308, 21);
+            this.QuestionnaireDropDown.TabIndex = 45;
             // 
             // PortLabel
             // 
@@ -423,16 +423,16 @@ namespace Blaise.Instrument.Data.Gui
             this.Controls.Add(this.RemotePortLabel);
             this.Controls.Add(this.PortTextBox);
             this.Controls.Add(this.PortLabel);
-            this.Controls.Add(this.InstrumentDropDown);
-            this.Controls.Add(this.RefreshInstrumentsButton);
+            this.Controls.Add(this.QuestionnaireDropDown);
+            this.Controls.Add(this.RefreshQuestionnairesButton);
             this.Controls.Add(this.ServerParkDropDown);
-            this.Controls.Add(this.InstallInstrumentLabel);
+            this.Controls.Add(this.InstallQuestionnaireLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CaseSampleFileTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.BrowseCaseFileButton);
             this.Controls.Add(this.TestConnectionButton);
-            this.Controls.Add(this.InstallInstrumentButton);
+            this.Controls.Add(this.InstallQuestionnaireButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.connectionSettings);
             this.Controls.Add(this.caseDetailsLabel);
@@ -451,11 +451,11 @@ namespace Blaise.Instrument.Data.Gui
             this.Controls.Add(this.primaryKeyFromLabel);
             this.Controls.Add(this.NumberOfCasesTextBox);
             this.Controls.Add(this.numberOfCasesLabel);
-            this.Controls.Add(this.BrowseInstrumentFile);
-            this.Controls.Add(this.instrumentFileLabel);
-            this.Controls.Add(this.InstrumentFileTextBox);
+            this.Controls.Add(this.BrowseQuestionnaireFile);
+            this.Controls.Add(this.questionnaireFileLabel);
+            this.Controls.Add(this.QuestionnaireFileTextBox);
             this.Name = "BlaiseDataTool";
-            this.Text = "Instrument data helper";
+            this.Text = "Questionnaire data helper";
             this.Load += new System.EventHandler(this.BlaiseDataTool_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -464,9 +464,9 @@ namespace Blaise.Instrument.Data.Gui
 
         #endregion
 
-        private System.Windows.Forms.TextBox InstrumentFileTextBox;
-        private System.Windows.Forms.Label instrumentFileLabel;
-        private System.Windows.Forms.Button BrowseInstrumentFile;
+        private System.Windows.Forms.TextBox QuestionnaireFileTextBox;
+        private System.Windows.Forms.Label questionnaireFileLabel;
+        private System.Windows.Forms.Button BrowseQuestionnaireFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label numberOfCasesLabel;
         private System.Windows.Forms.TextBox NumberOfCasesTextBox;
@@ -486,16 +486,16 @@ namespace Blaise.Instrument.Data.Gui
         private System.Windows.Forms.Label caseDetailsLabel;
         private System.Windows.Forms.Label connectionSettings;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button InstallInstrumentButton;
+        private System.Windows.Forms.Button InstallQuestionnaireButton;
         private System.Windows.Forms.Button TestConnectionButton;
         private System.Windows.Forms.Button BrowseCaseFileButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox CaseSampleFileTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label InstallInstrumentLabel;
+        private System.Windows.Forms.Label InstallQuestionnaireLabel;
         private System.Windows.Forms.ComboBox ServerParkDropDown;
-        private System.Windows.Forms.Button RefreshInstrumentsButton;
-        private System.Windows.Forms.ComboBox InstrumentDropDown;
+        private System.Windows.Forms.Button RefreshQuestionnairesButton;
+        private System.Windows.Forms.ComboBox QuestionnaireDropDown;
         private System.Windows.Forms.Label PortLabel;
         private System.Windows.Forms.TextBox PortTextBox;
         private System.Windows.Forms.Label RemotePortLabel;

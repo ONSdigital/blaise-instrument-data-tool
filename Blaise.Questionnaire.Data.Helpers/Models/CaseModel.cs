@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Blaise.Instrument.Data.Helpers.Models
+namespace Blaise.Questionnaire.Data.Helpers.Models
 {
     public class CaseModel
     {
