@@ -81,7 +81,7 @@ namespace Blaise.Questionnaire.Data.Gui
             this.questionnaireFileLabel.AutoSize = true;
             this.questionnaireFileLabel.Location = new System.Drawing.Point(29, 441);
             this.questionnaireFileLabel.Name = "questionnaireFileLabel";
-            this.questionnaireFileLabel.Size = new System.Drawing.Size(101, 13);
+            this.questionnaireFileLabel.Size = new System.Drawing.Size(117, 13);
             this.questionnaireFileLabel.TabIndex = 1;
             this.questionnaireFileLabel.Text = "Questionnaire package";
             // 
@@ -149,7 +149,7 @@ namespace Blaise.Questionnaire.Data.Gui
             this.imstrumentNameLabel.AutoSize = true;
             this.imstrumentNameLabel.Location = new System.Drawing.Point(29, 611);
             this.imstrumentNameLabel.Name = "imstrumentNameLabel";
-            this.imstrumentNameLabel.Size = new System.Drawing.Size(85, 13);
+            this.imstrumentNameLabel.Size = new System.Drawing.Size(101, 13);
             this.imstrumentNameLabel.TabIndex = 15;
             this.imstrumentNameLabel.Text = "Questionnaire name";
             // 
@@ -326,7 +326,7 @@ namespace Blaise.Questionnaire.Data.Gui
             this.InstallQuestionnaireLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InstallQuestionnaireLabel.Location = new System.Drawing.Point(31, 400);
             this.InstallQuestionnaireLabel.Name = "InstallQuestionnaireLabel";
-            this.InstallQuestionnaireLabel.Size = new System.Drawing.Size(103, 13);
+            this.InstallQuestionnaireLabel.Size = new System.Drawing.Size(121, 13);
             this.InstallQuestionnaireLabel.TabIndex = 42;
             this.InstallQuestionnaireLabel.Text = "Install questionnaire";
             // 
@@ -416,6 +416,8 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(503, 820);
             this.Controls.Add(this.SelectServerparkLabel);
             this.Controls.Add(this.label2);
