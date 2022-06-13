@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using Blaise.Instrument.Data.Gui.Extensions;
-using Blaise.Instrument.Data.Helpers;
 using Blaise.Nuget.Api.Contracts.Models;
 using Blaise.Nuget.Api.Providers;
+using Blaise.Questionnaire.Data.Gui.Extensions;
+using Blaise.Questionnaire.Data.Helpers;
 
-namespace Blaise.Instrument.Data.Gui
+namespace Blaise.Questionnaire.Data.Gui
 {
     public partial class BlaiseDataTool : Form
     {
@@ -49,7 +49,7 @@ namespace Blaise.Instrument.Data.Gui
             var result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                InstrumentFileTextBox.Text = openFileDialog.FileName;
+                QuestionnaireFileTextBox.Text = openFileDialog.FileName;
             }
             else
             {
@@ -62,11 +62,11 @@ namespace Blaise.Instrument.Data.Gui
         {
             var numberOfCases = NumberOfCasesTextBox.GetNullableIntegerValue();
             var primaryKeyValue = PrimaryKeyFromTextbox.GetNullableIntegerValue();
-            var instrumentName = InstrumentDropDown.SelectedItem?.ToString();
+            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
             var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
 
             if (numberOfCases == null || primaryKeyValue == null ||
-                instrumentName == null || serverParkName == null)
+                questionnaireName == null || serverParkName == null)
             {
                 MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -77,7 +77,7 @@ namespace Blaise.Instrument.Data.Gui
             {
                 CaseHelper
                     .GetInstance(_connectionModel)
-                    .CreateCasesInBlaise((int)numberOfCases, instrumentName, serverParkName, (int)primaryKeyValue,
+                    .CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue,
                         CaseSampleFileTextBox.GetNullableStringValue());
 
                 MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -155,14 +155,14 @@ namespace Blaise.Instrument.Data.Gui
             MessageBox.Show(@"Connection details appear to be incorrect", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void InstallInstrumentButton_Click(object sender, EventArgs e)
+        private void InstallQuestionnaireButton_Click(object sender, EventArgs e)
         {
-            var instrumentFile = InstrumentFileTextBox.GetNullableStringValue();
-            var instrumentName = InstrumentDropDown.SelectedItem?.ToString();
+            var questionnaireFile = QuestionnaireFileTextBox.GetNullableStringValue();
+            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
             var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
 
-            if (instrumentFile == null ||
-                instrumentName == null ||
+            if (questionnaireFile == null ||
+                questionnaireName == null ||
                 serverParkName == null)
             {
                 MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database",
@@ -172,15 +172,15 @@ namespace Blaise.Instrument.Data.Gui
 
             try
             {
-                InstrumentHelper.GetInstance(_connectionModel).InstallInstrument(instrumentName, serverParkName,
-                    instrumentFile);
+                QuestionnaireHelper.GetInstance(_connectionModel).InstallQuestionnaire(questionnaireName, serverParkName,
+                    questionnaireFile);
 
-                MessageBox.Show(@"Installation successful", @"Install Instrument", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(@"Installation successful", @"Install Questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                MessageBox.Show($"There was an error installing the instrument - {exception.Message}",
+                MessageBox.Show($"There was an error installing the questionnaire - {exception.Message}",
                     @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -199,7 +199,7 @@ namespace Blaise.Instrument.Data.Gui
             }
         }
 
-        private void RefreshInstrumentsButton_Click(object sender, EventArgs e)
+        private void RefreshQuestionnairesButton_Click(object sender, EventArgs e)
         {
             if (!TestBlaiseConnectionIsCorrect())
             {
@@ -270,16 +270,16 @@ namespace Blaise.Instrument.Data.Gui
             ServerParkDropDown.Items.AddRange(serverParks.Cast<object>().ToArray());
             ServerParkDropDown.SelectedIndex = 0;
 
-            var instruments = InstrumentHelper.GetInstance(_connectionModel).GetInstruments().ToList();
+            var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires().ToList();
 
-            if (!instruments.Any())
+            if (!questionnaires.Any())
             {
                 return;
             }
 
-            InstrumentDropDown.Items.Clear();
-            InstrumentDropDown.Items.AddRange(instruments.Cast<object>().ToArray());
-            InstrumentDropDown.SelectedIndex = 0;
+            QuestionnaireDropDown.Items.Clear();
+            QuestionnaireDropDown.Items.AddRange(questionnaires.Cast<object>().ToArray());
+            QuestionnaireDropDown.SelectedIndex = 0;
         }
     }
 }

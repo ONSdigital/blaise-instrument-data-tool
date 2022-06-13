@@ -2,7 +2,7 @@
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Models;
 
-namespace Blaise.Instrument.Data.Helpers
+namespace Blaise.Questionnaire.Data.Helpers
 {
     public class ConnectionHelper
     {

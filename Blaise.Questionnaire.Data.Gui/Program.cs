@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Blaise.Instrument.Data.Gui
+namespace Blaise.Questionnaire.Data.Gui
 {
     static class Program
     {
