@@ -77,8 +77,34 @@ namespace Blaise.Questionnaire.Data.Gui
             {
                 CaseHelper
                     .GetInstance(_connectionModel)
-                    .CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue,
-                        CaseSampleFileTextBox.GetNullableStringValue());
+                    .CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue);
+
+                MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show($"There was an error creating the cases - {exception.Message}",
+                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CreateFromSampleButton_Click(object sender, EventArgs e)
+        {
+            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
+            var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
+            var caseSampleFile = CaseSampleFileTextBox.GetNullableStringValue();
+            if (caseSampleFile is null)
+            {
+                MessageBox.Show("No sample file was selected",
+                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                CaseHelper
+                    .GetInstance(_connectionModel)
+                    .CreateCasesInBlaise(questionnaireName, serverParkName, caseSampleFile);
 
                 MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

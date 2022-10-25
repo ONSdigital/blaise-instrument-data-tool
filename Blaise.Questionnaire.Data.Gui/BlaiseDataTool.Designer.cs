@@ -67,6 +67,9 @@ namespace Blaise.Questionnaire.Data.Gui
             this.RemotePortTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SelectServerparkLabel = new System.Windows.Forms.Label();
+            this.CraeteCasesFromSample = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.CreateFromSampleButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // QuestionnaireFileTextBox
@@ -105,7 +108,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // numberOfCasesLabel
             // 
             this.numberOfCasesLabel.AutoSize = true;
-            this.numberOfCasesLabel.Location = new System.Drawing.Point(31, 723);
+            this.numberOfCasesLabel.Location = new System.Drawing.Point(31, 687);
             this.numberOfCasesLabel.Name = "numberOfCasesLabel";
             this.numberOfCasesLabel.Size = new System.Drawing.Size(87, 13);
             this.numberOfCasesLabel.TabIndex = 3;
@@ -113,7 +116,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // NumberOfCasesTextBox
             // 
-            this.NumberOfCasesTextBox.Location = new System.Drawing.Point(149, 720);
+            this.NumberOfCasesTextBox.Location = new System.Drawing.Point(149, 684);
             this.NumberOfCasesTextBox.Name = "NumberOfCasesTextBox";
             this.NumberOfCasesTextBox.Size = new System.Drawing.Size(46, 20);
             this.NumberOfCasesTextBox.TabIndex = 4;
@@ -121,7 +124,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // primaryKeyFromLabel
             // 
             this.primaryKeyFromLabel.AutoSize = true;
-            this.primaryKeyFromLabel.Location = new System.Drawing.Point(31, 689);
+            this.primaryKeyFromLabel.Location = new System.Drawing.Point(31, 653);
             this.primaryKeyFromLabel.Name = "primaryKeyFromLabel";
             this.primaryKeyFromLabel.Size = new System.Drawing.Size(84, 13);
             this.primaryKeyFromLabel.TabIndex = 5;
@@ -129,14 +132,14 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // PrimaryKeyFromTextbox
             // 
-            this.PrimaryKeyFromTextbox.Location = new System.Drawing.Point(149, 686);
+            this.PrimaryKeyFromTextbox.Location = new System.Drawing.Point(149, 650);
             this.PrimaryKeyFromTextbox.Name = "PrimaryKeyFromTextbox";
             this.PrimaryKeyFromTextbox.Size = new System.Drawing.Size(100, 20);
             this.PrimaryKeyFromTextbox.TabIndex = 6;
             // 
             // CreateInDatabaseButton
             // 
-            this.CreateInDatabaseButton.Location = new System.Drawing.Point(149, 766);
+            this.CreateInDatabaseButton.Location = new System.Drawing.Point(149, 730);
             this.CreateInDatabaseButton.Name = "CreateInDatabaseButton";
             this.CreateInDatabaseButton.Size = new System.Drawing.Size(83, 29);
             this.CreateInDatabaseButton.TabIndex = 11;
@@ -285,9 +288,9 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.BrowseCaseFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrowseCaseFileButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BrowseCaseFileButton.Location = new System.Drawing.Point(422, 647);
+            this.BrowseCaseFileButton.Location = new System.Drawing.Point(422, 837);
             this.BrowseCaseFileButton.Name = "BrowseCaseFileButton";
-            this.BrowseCaseFileButton.Size = new System.Drawing.Size(35, 22);
+            this.BrowseCaseFileButton.Size = new System.Drawing.Size(43, 22);
             this.BrowseCaseFileButton.TabIndex = 38;
             this.BrowseCaseFileButton.Text = "...";
             this.BrowseCaseFileButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -297,7 +300,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 649);
+            this.label3.Location = new System.Drawing.Point(47, 839);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 39;
@@ -305,7 +308,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // CaseSampleFileTextBox
             // 
-            this.CaseSampleFileTextBox.Location = new System.Drawing.Point(149, 649);
+            this.CaseSampleFileTextBox.Location = new System.Drawing.Point(149, 839);
             this.CaseSampleFileTextBox.Name = "CaseSampleFileTextBox";
             this.CaseSampleFileTextBox.Size = new System.Drawing.Size(265, 20);
             this.CaseSampleFileTextBox.TabIndex = 40;
@@ -412,13 +415,46 @@ namespace Blaise.Questionnaire.Data.Gui
             this.SelectServerparkLabel.TabIndex = 51;
             this.SelectServerparkLabel.Text = "Select server park";
             // 
+            // CraeteCasesFromSample
+            // 
+            this.CraeteCasesFromSample.AutoSize = true;
+            this.CraeteCasesFromSample.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CraeteCasesFromSample.Location = new System.Drawing.Point(31, 808);
+            this.CraeteCasesFromSample.Name = "CraeteCasesFromSample";
+            this.CraeteCasesFromSample.Size = new System.Drawing.Size(159, 13);
+            this.CraeteCasesFromSample.TabIndex = 52;
+            this.CraeteCasesFromSample.Text = "Create cases in sample file";
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Location = new System.Drawing.Point(32, 790);
+            this.label6.MaximumSize = new System.Drawing.Size(0, 2);
+            this.label6.MinimumSize = new System.Drawing.Size(450, 2);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(450, 2);
+            this.label6.TabIndex = 53;
+            // 
+            // CreateFromSampleButton
+            // 
+            this.CreateFromSampleButton.Location = new System.Drawing.Point(151, 882);
+            this.CreateFromSampleButton.Name = "CreateFromSampleButton";
+            this.CreateFromSampleButton.Size = new System.Drawing.Size(83, 29);
+            this.CreateFromSampleButton.TabIndex = 54;
+            this.CreateFromSampleButton.Text = "Create";
+            this.CreateFromSampleButton.UseVisualStyleBackColor = true;
+            this.CreateFromSampleButton.Click += new System.EventHandler(this.CreateFromSampleButton_Click);
+            // 
             // BlaiseDataTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(503, 820);
+            this.ClientSize = new System.Drawing.Size(503, 941);
+            this.Controls.Add(this.CreateFromSampleButton);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.CraeteCasesFromSample);
             this.Controls.Add(this.SelectServerparkLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.RemotePortTextBox);
@@ -504,6 +540,9 @@ namespace Blaise.Questionnaire.Data.Gui
         private System.Windows.Forms.TextBox RemotePortTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label SelectServerparkLabel;
+        private System.Windows.Forms.Label CraeteCasesFromSample;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button CreateFromSampleButton;
     }
 }
 
