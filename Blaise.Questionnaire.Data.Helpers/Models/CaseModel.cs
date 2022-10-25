@@ -5,7 +5,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
 {
     public class CaseModel
     {
-        public CaseModel(int primaryKey, Dictionary<string, string> sampleDataFields)
+        public CaseModel(int primaryKey, Dictionary<string, string> sampleDataFields = null)
         {
             PrimaryKey = primaryKey.ToString();
             DataFields = InitialiseCaseDataFields(sampleDataFields);
@@ -13,16 +13,12 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
 
         public Dictionary<string, string> InitialiseCaseDataFields(Dictionary<string, string> dataFields)
         {
-            dataFields["QID.Serial_Number"] = PrimaryKey;
-            dataFields["QDataBag.uac1"] = Uac1;
-            dataFields["QDataBag.uac2"] = Uac2;
-            dataFields["QDataBag.uac3"] = Uac3;
+            if (dataFields is null)
+            {
+                dataFields = new Dictionary<string, string>();
+            }
 
-            SetDefaultValueIfNull(dataFields, "QDataBag.TelNo", "07000000000");
-            SetDefaultValueIfNull(dataFields, "QDataBag.TelNo2", "07000000000");
-
-            //QSample.PostCode
-            //QSample.TownName
+            dataFields["qiD.Serial_Number"] = PrimaryKey;
 
             return dataFields;
         }
