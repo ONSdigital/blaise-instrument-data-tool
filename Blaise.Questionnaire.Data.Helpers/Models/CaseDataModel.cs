@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Blaise.Questionnaire.Data.Helpers.Models
 {
-    public class CaseModel
+    public class CaseDataModel
     {
-        public CaseModel(int primaryKey, Dictionary<string, string> sampleDataFields = null)
+        public CaseDataModel(int primaryKey, Dictionary<string, string> sampleDataFields = null)
         {
             PrimaryKey = primaryKey.ToString();
             DataFields = InitialiseCaseDataFields(sampleDataFields);
