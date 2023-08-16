@@ -5,8 +5,8 @@ using System.Threading;
 using Blaise.Nuget.Api.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Models;
+using Blaise.Questionnaire.Data.Helpers.Models;
 using Newtonsoft.Json;
-using CaseModel = Blaise.Questionnaire.Data.Helpers.Models.CaseModel;
 
 namespace Blaise.Questionnaire.Data.Helpers
 {
@@ -27,55 +27,58 @@ namespace Blaise.Questionnaire.Data.Helpers
         public void CreateCasesInBlaise(int expectedNumberOfCases, string questionnaireName, string serverParkName, 
             int primaryKey)
         {
-            _blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
-            for (var count = 0; count < expectedNumberOfCases; count++)
+            //_blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
+            var caseModels = new List<CaseModel>();
+            try
             {
-                try
+                for (var count = 0; count < expectedNumberOfCases; count++)
                 {
-                    var caseModel = new CaseModel(primaryKey);
-                    CreateCaseInBlaise(caseModel, questionnaireName, serverParkName);
+                    var caseDataModel = new CaseDataModel(primaryKey);
+                    caseModels.Add(new CaseModel(caseDataModel.PrimaryKey, caseDataModel.DataFields));
                     primaryKey++;
-                    Console.WriteLine($"Created case '{primaryKey}' for questionnaire '{questionnaireName}'");
                 }
-                catch(Exception ex)
-                {
-                    Console.WriteLine($"There was an error {ex} writing case '{primaryKey}' for questionnaire '{questionnaireName}'");
-                    Thread.Sleep(2000);
-                }
+
+                _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"There was an error {ex} writing {caseModels.Count} cases for questionnaire '{questionnaireName}'");
             }
 
-            Console.WriteLine($"Completed cases for questionnaire '{questionnaireName}'");
+            Console.WriteLine($"Completed creating cases for questionnaire '{questionnaireName}'");
         }
 
         public void CreateCasesInBlaise(string questionnaireName, string serverParkName, string caseSampleFile)
         {
-            _blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
-            var sampleCaseList = GetSampleDataFields(caseSampleFile);
-            
-            foreach (var sampleCase in sampleCaseList)
-            {
-                var primaryKey = int.Parse(sampleCase["qiD.Serial_Number"]);
+            //_blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
 
-                try
+            var caseModels = new List<CaseModel>();
+            var sampleCaseList = GetSampleDataFields(caseSampleFile);
+            try
+            {
+                foreach (var sampleCase in sampleCaseList)
                 {
-                    var caseModel = new CaseModel(primaryKey, sampleCase);
-                    CreateCaseInBlaise(caseModel, questionnaireName, serverParkName);
-                    Console.WriteLine($"Created case '{primaryKey}' for questionnaire '{questionnaireName}'");
+
+                    var primaryKey = int.Parse(sampleCase["qiD.Serial_Number"]);
+                    var caseDataModel = new CaseDataModel(primaryKey, sampleCase);
+                    caseModels.Add(new CaseModel(caseDataModel.PrimaryKey, caseDataModel.DataFields));
+
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"There was an error {ex} writing case '{primaryKey}' for questionnaire '{questionnaireName}'");
-                    Thread.Sleep(2000);
-                }
+
+                _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"There was an error {ex} writing {caseModels.Count} cases for questionnaire '{questionnaireName}'");
             }
 
-            Console.WriteLine($"Completed cases for questionnaire '{questionnaireName}'");
+            Console.WriteLine($"Completed creating cases for questionnaire '{questionnaireName}'");
         }
 
-        public void CreateCaseInBlaise(CaseModel caseModel, string questionnaireName, string serverParkName)
+        public void CreateCaseInBlaise(CaseDataModel caseDataModel, string questionnaireName, string serverParkName)
         {
 
-            _blaiseCaseApi.CreateCase(caseModel.PrimaryKey, caseModel.DataFields, questionnaireName, serverParkName);
+            _blaiseCaseApi.CreateCase(caseDataModel.PrimaryKey, caseDataModel.DataFields, questionnaireName, serverParkName);
         }
 
         private List<Dictionary<string, string>> GetSampleDataFields(string caseSampleFile)
