@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using Blaise.Nuget.Api.Api;
+﻿using Blaise.Nuget.Api.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Models;
+using Blaise.Questionnaire.Data.Helpers.Models;
 using Newtonsoft.Json;
-using CaseModel = Blaise.Questionnaire.Data.Helpers.Models.CaseModel;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Blaise.Questionnaire.Data.Helpers
 {
@@ -24,58 +23,68 @@ namespace Blaise.Questionnaire.Data.Helpers
             return new CaseHelper(connectionModel);
         }
 
-        public void CreateCasesInBlaise(int expectedNumberOfCases, string questionnaireName, string serverParkName, 
+        public void CreateCasesInBlaise(int numberOfCases, string questionnaireName, string serverParkName, 
             int primaryKey)
         {
-            _blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
-            for (var count = 0; count < expectedNumberOfCases; count++)
+            var caseModels = new List<CaseModel>();
+            try
             {
-                try
+                for (var count = 1; count <= numberOfCases; count++)
                 {
-                    var caseModel = new CaseModel(primaryKey);
-                    CreateCaseInBlaise(caseModel, questionnaireName, serverParkName);
+                    var caseDataModel = new CaseDataModel(primaryKey);
+                    caseModels.Add(caseDataModel.ToCaseModel());
                     primaryKey++;
-                    Console.WriteLine($"Created case '{primaryKey}' for questionnaire '{questionnaireName}'");
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine($"There was an error {ex} writing case '{primaryKey}' for questionnaire '{questionnaireName}'");
-                    Thread.Sleep(2000);
+
+                    if (MaxChunkSizeOrMaxCountReached(count, numberOfCases))
+                    {
+                        _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
+                        caseModels = new List<CaseModel>();
+                        Console.WriteLine($"Total cases written {count}");
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"There was an error {ex} writing {caseModels.Count} cases for questionnaire '{questionnaireName}'");
+            }
 
-            Console.WriteLine($"Completed cases for questionnaire '{questionnaireName}'");
+            Console.WriteLine($"Completed creating cases for questionnaire '{questionnaireName}'");
         }
 
         public void CreateCasesInBlaise(string questionnaireName, string serverParkName, string caseSampleFile)
         {
             _blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
-            var sampleCaseList = GetSampleDataFields(caseSampleFile);
-            
-            foreach (var sampleCase in sampleCaseList)
-            {
-                var primaryKey = int.Parse(sampleCase["qiD.Serial_Number"]);
 
-                try
+            var caseModels = new List<CaseModel>();
+            var sampleCaseList = GetSampleDataFields(caseSampleFile);
+            var count = 1;
+
+            try
+            {
+                foreach (var sampleCase in sampleCaseList)   
                 {
-                    var caseModel = new CaseModel(primaryKey, sampleCase);
-                    CreateCaseInBlaise(caseModel, questionnaireName, serverParkName);
-                    Console.WriteLine($"Created case '{primaryKey}' for questionnaire '{questionnaireName}'");
+                    var primaryKey = int.Parse(sampleCase["qiD.Serial_Number"]);
+                    var caseDataModel = new CaseDataModel(primaryKey, sampleCase);
+                    caseModels.Add(caseDataModel.ToCaseModel());
+
+                    if (MaxChunkSizeOrMaxCountReached(count, sampleCaseList.Count))
+                    {
+                        _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
+                        caseModels = new List<CaseModel>();
+                        Console.WriteLine($"Total cases written {count}");
+                    }
+
+                    count++;
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"There was an error {ex} writing case '{primaryKey}' for questionnaire '{questionnaireName}'");
-                    Thread.Sleep(2000);
-                }
+
+                _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"There was an error {ex} writing {caseModels.Count} cases for questionnaire '{questionnaireName}'");
             }
 
-            Console.WriteLine($"Completed cases for questionnaire '{questionnaireName}'");
-        }
-
-        public void CreateCaseInBlaise(CaseModel caseModel, string questionnaireName, string serverParkName)
-        {
-
-            _blaiseCaseApi.CreateCase(caseModel.PrimaryKey, caseModel.DataFields, questionnaireName, serverParkName);
+            Console.WriteLine($"Completed creating cases for questionnaire '{questionnaireName}'");
         }
 
         private List<Dictionary<string, string>> GetSampleDataFields(string caseSampleFile)
@@ -87,6 +96,12 @@ namespace Blaise.Questionnaire.Data.Helpers
 
             var json = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(File.ReadAllText(caseSampleFile));
             return json;
+        }
+
+        private static bool MaxChunkSizeOrMaxCountReached(int count, int maxCount)
+        {
+            const int maxChunkSize = 500;
+            return count % maxChunkSize == 0 || count == maxCount;
         }
     }
 }
