@@ -307,5 +307,20 @@ namespace Blaise.Questionnaire.Data.Gui
             QuestionnaireDropDown.Items.AddRange(questionnaires.Cast<object>().ToArray());
             QuestionnaireDropDown.SelectedIndex = 0;
         }
+
+        private void bindingLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void serverNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

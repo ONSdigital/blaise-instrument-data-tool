@@ -74,15 +74,15 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // QuestionnaireFileTextBox
             // 
-            this.QuestionnaireFileTextBox.Location = new System.Drawing.Point(151, 438);
+            this.QuestionnaireFileTextBox.Location = new System.Drawing.Point(160, 400);
             this.QuestionnaireFileTextBox.Name = "QuestionnaireFileTextBox";
-            this.QuestionnaireFileTextBox.Size = new System.Drawing.Size(265, 20);
+            this.QuestionnaireFileTextBox.Size = new System.Drawing.Size(144, 20);
             this.QuestionnaireFileTextBox.TabIndex = 0;
             // 
             // questionnaireFileLabel
             // 
             this.questionnaireFileLabel.AutoSize = true;
-            this.questionnaireFileLabel.Location = new System.Drawing.Point(29, 441);
+            this.questionnaireFileLabel.Location = new System.Drawing.Point(32, 408);
             this.questionnaireFileLabel.Name = "questionnaireFileLabel";
             this.questionnaireFileLabel.Size = new System.Drawing.Size(117, 13);
             this.questionnaireFileLabel.TabIndex = 1;
@@ -92,9 +92,9 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.BrowseQuestionnaireFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrowseQuestionnaireFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BrowseQuestionnaireFile.Location = new System.Drawing.Point(424, 436);
+            this.BrowseQuestionnaireFile.Location = new System.Drawing.Point(320, 400);
             this.BrowseQuestionnaireFile.Name = "BrowseQuestionnaireFile";
-            this.BrowseQuestionnaireFile.Size = new System.Drawing.Size(35, 22);
+            this.BrowseQuestionnaireFile.Size = new System.Drawing.Size(43, 22);
             this.BrowseQuestionnaireFile.TabIndex = 2;
             this.BrowseQuestionnaireFile.Text = "...";
             this.BrowseQuestionnaireFile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -108,7 +108,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // numberOfCasesLabel
             // 
             this.numberOfCasesLabel.AutoSize = true;
-            this.numberOfCasesLabel.Location = new System.Drawing.Point(31, 687);
+            this.numberOfCasesLabel.Location = new System.Drawing.Point(32, 592);
             this.numberOfCasesLabel.Name = "numberOfCasesLabel";
             this.numberOfCasesLabel.Size = new System.Drawing.Size(87, 13);
             this.numberOfCasesLabel.TabIndex = 3;
@@ -116,15 +116,15 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // NumberOfCasesTextBox
             // 
-            this.NumberOfCasesTextBox.Location = new System.Drawing.Point(149, 684);
+            this.NumberOfCasesTextBox.Location = new System.Drawing.Point(144, 584);
             this.NumberOfCasesTextBox.Name = "NumberOfCasesTextBox";
-            this.NumberOfCasesTextBox.Size = new System.Drawing.Size(46, 20);
+            this.NumberOfCasesTextBox.Size = new System.Drawing.Size(88, 20);
             this.NumberOfCasesTextBox.TabIndex = 4;
             // 
             // primaryKeyFromLabel
             // 
             this.primaryKeyFromLabel.AutoSize = true;
-            this.primaryKeyFromLabel.Location = new System.Drawing.Point(31, 653);
+            this.primaryKeyFromLabel.Location = new System.Drawing.Point(32, 560);
             this.primaryKeyFromLabel.Name = "primaryKeyFromLabel";
             this.primaryKeyFromLabel.Size = new System.Drawing.Size(84, 13);
             this.primaryKeyFromLabel.TabIndex = 5;
@@ -132,16 +132,16 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // PrimaryKeyFromTextbox
             // 
-            this.PrimaryKeyFromTextbox.Location = new System.Drawing.Point(149, 650);
+            this.PrimaryKeyFromTextbox.Location = new System.Drawing.Point(144, 552);
             this.PrimaryKeyFromTextbox.Name = "PrimaryKeyFromTextbox";
-            this.PrimaryKeyFromTextbox.Size = new System.Drawing.Size(100, 20);
+            this.PrimaryKeyFromTextbox.Size = new System.Drawing.Size(88, 20);
             this.PrimaryKeyFromTextbox.TabIndex = 6;
             // 
             // CreateInDatabaseButton
             // 
-            this.CreateInDatabaseButton.Location = new System.Drawing.Point(149, 730);
+            this.CreateInDatabaseButton.Location = new System.Drawing.Point(32, 616);
             this.CreateInDatabaseButton.Name = "CreateInDatabaseButton";
-            this.CreateInDatabaseButton.Size = new System.Drawing.Size(83, 29);
+            this.CreateInDatabaseButton.Size = new System.Drawing.Size(100, 29);
             this.CreateInDatabaseButton.TabIndex = 11;
             this.CreateInDatabaseButton.Text = "Create";
             this.CreateInDatabaseButton.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // imstrumentNameLabel
             // 
             this.imstrumentNameLabel.AutoSize = true;
-            this.imstrumentNameLabel.Location = new System.Drawing.Point(29, 611);
+            this.imstrumentNameLabel.Location = new System.Drawing.Point(32, 528);
             this.imstrumentNameLabel.Name = "imstrumentNameLabel";
             this.imstrumentNameLabel.Size = new System.Drawing.Size(101, 13);
             this.imstrumentNameLabel.TabIndex = 15;
@@ -159,7 +159,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // serverParkLabel
             // 
             this.serverParkLabel.AutoSize = true;
-            this.serverParkLabel.Location = new System.Drawing.Point(66, 323);
+            this.serverParkLabel.Location = new System.Drawing.Point(32, 328);
             this.serverParkLabel.Name = "serverParkLabel";
             this.serverParkLabel.Size = new System.Drawing.Size(62, 13);
             this.serverParkLabel.TabIndex = 17;
@@ -168,42 +168,44 @@ namespace Blaise.Questionnaire.Data.Gui
             // serverNameLabel
             // 
             this.serverNameLabel.AutoSize = true;
-            this.serverNameLabel.Location = new System.Drawing.Point(65, 56);
+            this.serverNameLabel.Location = new System.Drawing.Point(32, 72);
             this.serverNameLabel.Name = "serverNameLabel";
             this.serverNameLabel.Size = new System.Drawing.Size(67, 13);
             this.serverNameLabel.TabIndex = 19;
             this.serverNameLabel.Text = "Server name";
+            this.serverNameLabel.Click += new System.EventHandler(this.serverNameLabel_Click);
             // 
             // ServerNameTextBox
             // 
-            this.ServerNameTextBox.Location = new System.Drawing.Point(153, 53);
+            this.ServerNameTextBox.Location = new System.Drawing.Point(112, 72);
             this.ServerNameTextBox.Name = "ServerNameTextBox";
-            this.ServerNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ServerNameTextBox.Size = new System.Drawing.Size(256, 20);
             this.ServerNameTextBox.TabIndex = 20;
             this.ServerNameTextBox.TextChanged += new System.EventHandler(this.ServerNameTextBox_TextChanged);
             // 
             // bindingLabel
             // 
             this.bindingLabel.AutoSize = true;
-            this.bindingLabel.Location = new System.Drawing.Point(318, 56);
+            this.bindingLabel.Location = new System.Drawing.Point(32, 40);
             this.bindingLabel.Name = "bindingLabel";
             this.bindingLabel.Size = new System.Drawing.Size(42, 13);
             this.bindingLabel.TabIndex = 21;
             this.bindingLabel.Text = "Binding";
+            this.bindingLabel.Click += new System.EventHandler(this.bindingLabel_Click);
             // 
             // BindingDropDown
             // 
             this.BindingDropDown.FormattingEnabled = true;
-            this.BindingDropDown.Location = new System.Drawing.Point(366, 52);
+            this.BindingDropDown.Location = new System.Drawing.Point(112, 40);
             this.BindingDropDown.Name = "BindingDropDown";
-            this.BindingDropDown.Size = new System.Drawing.Size(99, 21);
+            this.BindingDropDown.Size = new System.Drawing.Size(72, 21);
             this.BindingDropDown.TabIndex = 22;
             this.BindingDropDown.TextChanged += new System.EventHandler(this.BindingDropDown_TextChanged);
             // 
             // userNameLabel
             // 
             this.userNameLabel.AutoSize = true;
-            this.userNameLabel.Location = new System.Drawing.Point(70, 93);
+            this.userNameLabel.Location = new System.Drawing.Point(32, 104);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(58, 13);
             this.userNameLabel.TabIndex = 23;
@@ -211,16 +213,16 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // UserNameTextBox
             // 
-            this.UserNameTextBox.Location = new System.Drawing.Point(153, 90);
+            this.UserNameTextBox.Location = new System.Drawing.Point(112, 104);
             this.UserNameTextBox.Name = "UserNameTextBox";
-            this.UserNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.UserNameTextBox.Size = new System.Drawing.Size(120, 20);
             this.UserNameTextBox.TabIndex = 24;
             this.UserNameTextBox.TextChanged += new System.EventHandler(this.UserNameTextBox_TextChanged);
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(308, 93);
+            this.passwordLabel.Location = new System.Drawing.Point(32, 136);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(53, 13);
             this.passwordLabel.TabIndex = 25;
@@ -228,9 +230,9 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(365, 90);
+            this.PasswordTextBox.Location = new System.Drawing.Point(112, 136);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.PasswordTextBox.Size = new System.Drawing.Size(120, 20);
             this.PasswordTextBox.TabIndex = 26;
             this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
@@ -238,7 +240,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.caseDetailsLabel.AutoSize = true;
             this.caseDetailsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.caseDetailsLabel.Location = new System.Drawing.Point(29, 566);
+            this.caseDetailsLabel.Location = new System.Drawing.Point(16, 496);
             this.caseDetailsLabel.Name = "caseDetailsLabel";
             this.caseDetailsLabel.Size = new System.Drawing.Size(81, 13);
             this.caseDetailsLabel.TabIndex = 29;
@@ -248,7 +250,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.connectionSettings.AutoSize = true;
             this.connectionSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectionSettings.Location = new System.Drawing.Point(37, 18);
+            this.connectionSettings.Location = new System.Drawing.Point(12, 9);
             this.connectionSettings.Name = "connectionSettings";
             this.connectionSettings.Size = new System.Drawing.Size(156, 13);
             this.connectionSettings.TabIndex = 33;
@@ -257,18 +259,19 @@ namespace Blaise.Questionnaire.Data.Gui
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(32, 274);
-            this.label1.MaximumSize = new System.Drawing.Size(0, 2);
-            this.label1.MinimumSize = new System.Drawing.Size(450, 2);
+            this.label1.Location = new System.Drawing.Point(16, 280);
+            this.label1.MaximumSize = new System.Drawing.Size(375, 2);
+            this.label1.MinimumSize = new System.Drawing.Size(375, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(450, 2);
+            this.label1.Size = new System.Drawing.Size(375, 2);
             this.label1.TabIndex = 35;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // InstallQuestionnaireButton
             // 
-            this.InstallQuestionnaireButton.Location = new System.Drawing.Point(151, 482);
+            this.InstallQuestionnaireButton.Location = new System.Drawing.Point(32, 432);
             this.InstallQuestionnaireButton.Name = "InstallQuestionnaireButton";
-            this.InstallQuestionnaireButton.Size = new System.Drawing.Size(94, 29);
+            this.InstallQuestionnaireButton.Size = new System.Drawing.Size(100, 29);
             this.InstallQuestionnaireButton.TabIndex = 36;
             this.InstallQuestionnaireButton.Text = "Install";
             this.InstallQuestionnaireButton.UseVisualStyleBackColor = true;
@@ -276,7 +279,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // TestConnectionButton
             // 
-            this.TestConnectionButton.Location = new System.Drawing.Point(153, 181);
+            this.TestConnectionButton.Location = new System.Drawing.Point(32, 232);
             this.TestConnectionButton.Name = "TestConnectionButton";
             this.TestConnectionButton.Size = new System.Drawing.Size(100, 29);
             this.TestConnectionButton.TabIndex = 37;
@@ -288,7 +291,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.BrowseCaseFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BrowseCaseFileButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BrowseCaseFileButton.Location = new System.Drawing.Point(422, 837);
+            this.BrowseCaseFileButton.Location = new System.Drawing.Point(312, 712);
             this.BrowseCaseFileButton.Name = "BrowseCaseFileButton";
             this.BrowseCaseFileButton.Size = new System.Drawing.Size(43, 22);
             this.BrowseCaseFileButton.TabIndex = 38;
@@ -300,7 +303,7 @@ namespace Blaise.Questionnaire.Data.Gui
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 839);
+            this.label3.Location = new System.Drawing.Point(32, 712);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 13);
             this.label3.TabIndex = 39;
@@ -308,26 +311,26 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // CaseSampleFileTextBox
             // 
-            this.CaseSampleFileTextBox.Location = new System.Drawing.Point(149, 839);
+            this.CaseSampleFileTextBox.Location = new System.Drawing.Point(112, 712);
             this.CaseSampleFileTextBox.Name = "CaseSampleFileTextBox";
-            this.CaseSampleFileTextBox.Size = new System.Drawing.Size(265, 20);
+            this.CaseSampleFileTextBox.Size = new System.Drawing.Size(184, 20);
             this.CaseSampleFileTextBox.TabIndex = 40;
             // 
             // label4
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(34, 535);
-            this.label4.MaximumSize = new System.Drawing.Size(0, 2);
-            this.label4.MinimumSize = new System.Drawing.Size(450, 2);
+            this.label4.Location = new System.Drawing.Point(16, 480);
+            this.label4.MaximumSize = new System.Drawing.Size(375, 2);
+            this.label4.MinimumSize = new System.Drawing.Size(375, 2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(450, 2);
+            this.label4.Size = new System.Drawing.Size(375, 2);
             this.label4.TabIndex = 41;
             // 
             // InstallQuestionnaireLabel
             // 
             this.InstallQuestionnaireLabel.AutoSize = true;
             this.InstallQuestionnaireLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InstallQuestionnaireLabel.Location = new System.Drawing.Point(31, 400);
+            this.InstallQuestionnaireLabel.Location = new System.Drawing.Point(16, 376);
             this.InstallQuestionnaireLabel.Name = "InstallQuestionnaireLabel";
             this.InstallQuestionnaireLabel.Size = new System.Drawing.Size(121, 13);
             this.InstallQuestionnaireLabel.TabIndex = 42;
@@ -335,16 +338,16 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // ServerParkDropDown
             // 
-            this.ServerParkDropDown.DropDownWidth = 300;
+            this.ServerParkDropDown.DropDownWidth = 100;
             this.ServerParkDropDown.FormattingEnabled = true;
-            this.ServerParkDropDown.Location = new System.Drawing.Point(149, 320);
+            this.ServerParkDropDown.Location = new System.Drawing.Point(104, 320);
             this.ServerParkDropDown.Name = "ServerParkDropDown";
-            this.ServerParkDropDown.Size = new System.Drawing.Size(308, 21);
+            this.ServerParkDropDown.Size = new System.Drawing.Size(120, 21);
             this.ServerParkDropDown.TabIndex = 43;
             // 
             // RefreshQuestionnairesButton
             // 
-            this.RefreshQuestionnairesButton.Location = new System.Drawing.Point(153, 221);
+            this.RefreshQuestionnairesButton.Location = new System.Drawing.Point(152, 232);
             this.RefreshQuestionnairesButton.Name = "RefreshQuestionnairesButton";
             this.RefreshQuestionnairesButton.Size = new System.Drawing.Size(100, 29);
             this.RefreshQuestionnairesButton.TabIndex = 44;
@@ -354,17 +357,17 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // QuestionnaireDropDown
             // 
-            this.QuestionnaireDropDown.DropDownWidth = 300;
+            this.QuestionnaireDropDown.DropDownWidth = 200;
             this.QuestionnaireDropDown.FormattingEnabled = true;
-            this.QuestionnaireDropDown.Location = new System.Drawing.Point(149, 611);
+            this.QuestionnaireDropDown.Location = new System.Drawing.Point(144, 520);
             this.QuestionnaireDropDown.Name = "QuestionnaireDropDown";
-            this.QuestionnaireDropDown.Size = new System.Drawing.Size(308, 21);
+            this.QuestionnaireDropDown.Size = new System.Drawing.Size(216, 21);
             this.QuestionnaireDropDown.TabIndex = 45;
             // 
             // PortLabel
             // 
             this.PortLabel.AutoSize = true;
-            this.PortLabel.Location = new System.Drawing.Point(102, 131);
+            this.PortLabel.Location = new System.Drawing.Point(32, 168);
             this.PortLabel.Name = "PortLabel";
             this.PortLabel.Size = new System.Drawing.Size(26, 13);
             this.PortLabel.TabIndex = 46;
@@ -372,16 +375,16 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // PortTextBox
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(153, 128);
+            this.PortTextBox.Location = new System.Drawing.Point(112, 168);
             this.PortTextBox.Name = "PortTextBox";
-            this.PortTextBox.Size = new System.Drawing.Size(55, 20);
+            this.PortTextBox.Size = new System.Drawing.Size(72, 20);
             this.PortTextBox.TabIndex = 47;
             this.PortTextBox.TextChanged += new System.EventHandler(this.PortTextBox_TextChanged);
             // 
             // RemotePortLabel
             // 
             this.RemotePortLabel.AutoSize = true;
-            this.RemotePortLabel.Location = new System.Drawing.Point(295, 131);
+            this.RemotePortLabel.Location = new System.Drawing.Point(32, 200);
             this.RemotePortLabel.Name = "RemotePortLabel";
             this.RemotePortLabel.Size = new System.Drawing.Size(65, 13);
             this.RemotePortLabel.TabIndex = 48;
@@ -389,27 +392,27 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             // RemotePortTextBox
             // 
-            this.RemotePortTextBox.Location = new System.Drawing.Point(366, 128);
+            this.RemotePortTextBox.Location = new System.Drawing.Point(112, 200);
             this.RemotePortTextBox.Name = "RemotePortTextBox";
-            this.RemotePortTextBox.Size = new System.Drawing.Size(55, 20);
+            this.RemotePortTextBox.Size = new System.Drawing.Size(72, 20);
             this.RemotePortTextBox.TabIndex = 49;
             this.RemotePortTextBox.TextChanged += new System.EventHandler(this.RemotePortTextBox_TextChanged);
             // 
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(32, 366);
-            this.label2.MaximumSize = new System.Drawing.Size(0, 2);
-            this.label2.MinimumSize = new System.Drawing.Size(450, 2);
+            this.label2.Location = new System.Drawing.Point(16, 360);
+            this.label2.MaximumSize = new System.Drawing.Size(375, 2);
+            this.label2.MinimumSize = new System.Drawing.Size(375, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(450, 2);
+            this.label2.Size = new System.Drawing.Size(375, 2);
             this.label2.TabIndex = 50;
             // 
             // SelectServerparkLabel
             // 
             this.SelectServerparkLabel.AutoSize = true;
             this.SelectServerparkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectServerparkLabel.Location = new System.Drawing.Point(37, 291);
+            this.SelectServerparkLabel.Location = new System.Drawing.Point(16, 296);
             this.SelectServerparkLabel.Name = "SelectServerparkLabel";
             this.SelectServerparkLabel.Size = new System.Drawing.Size(111, 13);
             this.SelectServerparkLabel.TabIndex = 51;
@@ -419,27 +422,27 @@ namespace Blaise.Questionnaire.Data.Gui
             // 
             this.CraeteCasesFromSample.AutoSize = true;
             this.CraeteCasesFromSample.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CraeteCasesFromSample.Location = new System.Drawing.Point(31, 808);
+            this.CraeteCasesFromSample.Location = new System.Drawing.Point(16, 680);
             this.CraeteCasesFromSample.Name = "CraeteCasesFromSample";
-            this.CraeteCasesFromSample.Size = new System.Drawing.Size(159, 13);
+            this.CraeteCasesFromSample.Size = new System.Drawing.Size(173, 13);
             this.CraeteCasesFromSample.TabIndex = 52;
-            this.CraeteCasesFromSample.Text = "Create cases in sample file";
+            this.CraeteCasesFromSample.Text = "Create cases from sample file";
             // 
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(32, 790);
-            this.label6.MaximumSize = new System.Drawing.Size(0, 2);
-            this.label6.MinimumSize = new System.Drawing.Size(450, 2);
+            this.label6.Location = new System.Drawing.Point(16, 664);
+            this.label6.MaximumSize = new System.Drawing.Size(375, 2);
+            this.label6.MinimumSize = new System.Drawing.Size(375, 2);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(450, 2);
+            this.label6.Size = new System.Drawing.Size(375, 2);
             this.label6.TabIndex = 53;
             // 
             // CreateFromSampleButton
             // 
-            this.CreateFromSampleButton.Location = new System.Drawing.Point(151, 882);
+            this.CreateFromSampleButton.Location = new System.Drawing.Point(32, 744);
             this.CreateFromSampleButton.Name = "CreateFromSampleButton";
-            this.CreateFromSampleButton.Size = new System.Drawing.Size(83, 29);
+            this.CreateFromSampleButton.Size = new System.Drawing.Size(100, 29);
             this.CreateFromSampleButton.TabIndex = 54;
             this.CreateFromSampleButton.Text = "Create";
             this.CreateFromSampleButton.UseVisualStyleBackColor = true;
@@ -451,7 +454,7 @@ namespace Blaise.Questionnaire.Data.Gui
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(503, 941);
+            this.ClientSize = new System.Drawing.Size(403, 785);
             this.Controls.Add(this.CreateFromSampleButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CraeteCasesFromSample);
@@ -492,8 +495,9 @@ namespace Blaise.Questionnaire.Data.Gui
             this.Controls.Add(this.BrowseQuestionnaireFile);
             this.Controls.Add(this.questionnaireFileLabel);
             this.Controls.Add(this.QuestionnaireFileTextBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BlaiseDataTool";
-            this.Text = "Questionnaire data helper";
+            this.Text = "Blaise Questionnaire Data Tool";
             this.Load += new System.EventHandler(this.BlaiseDataTool_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
