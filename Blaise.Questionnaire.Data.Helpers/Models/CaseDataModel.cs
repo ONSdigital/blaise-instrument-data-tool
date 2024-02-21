@@ -36,6 +36,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             dataFields["qdatabag.district"] = "district";
             dataFields["qdatabag.posttown"] = "posttown";
             dataFields["qdatabag.postcode"] = "np10 8xg";
+            dataFields["qdatabag.uprn"] = "100100963961";
             dataFields["qdatabag.uprn_latitude"] = "51.566";
             dataFields["qdatabag.uprn_longitude"] = "-3.026";
             dataFields["qdatabag.samptitle"] = "samptitle";
@@ -55,8 +56,8 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             dataFields["qsample.postcode"] = "postcode";
             dataFields["qsample.telno"] = "07000000000";
             dataFields["qsample.telno2"] = "07000000000";
-            dataFields["qhadmin.hout"] = "110";
-            dataFields["hout"] = "110";
+            dataFields["qhadmin.hout"] = "";
+            dataFields["hout"] = "";
             dataFields["qhadmin.interviewer[1]"] = "interviewer1";
             dataFields["dmhsize"] = "2";
             dataFields["dmname[1]"] = "dmname1";
@@ -73,7 +74,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             dataFields["catimana.caticall.regscalls[1].whomade"] = "whomade";
             dataFields["catimana.caticall.regscalls[5].dialresult"] = "1";
             dataFields["datamodelname"] = "datamodelname";
-            dataFields["offlinecapi.towhom"] = "towhom";
+            dataFields["offlinecapi.towhom"] = "rich";
 
             return dataFields;
         }
