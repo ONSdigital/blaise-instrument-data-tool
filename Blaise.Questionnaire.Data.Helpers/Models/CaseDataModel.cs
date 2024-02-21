@@ -9,7 +9,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
         public CaseDataModel(int primaryKey, Dictionary<string, string> sampleDataFields = null)
         {
             PrimaryKey = primaryKey.ToString();
-            DataFields = InitialiseCaseDataFields(sampleDataFields);
+            DataFields = sampleDataFields == null ? InitialiseCaseDataFields() : InitialiseCaseDataFieldsFromSample(sampleDataFields);
         }
 
         public CaseModel ToCaseModel()
@@ -17,12 +17,14 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
            return new CaseModel(PrimaryKey, DataFields);
         }
 
-        public Dictionary<string, string> InitialiseCaseDataFields(Dictionary<string, string> dataFields)
+        public Dictionary<string, string> InitialiseCaseDataFields()
         {
-            if (dataFields is null)
+            var dataFields = new Dictionary<string, string>
             {
-                dataFields = new Dictionary<string, string>();
-            }
+                ["qid.serial_number"] = PrimaryKey,
+                ["QDataBag.uac1"] = Uac1,
+                ["QDataBag.uac2"] = Uac2,
+                ["QDataBag.uac3"] = Uac3,
 
             dataFields["qid.serial_number"] = PrimaryKey;
             dataFields["qdatabag.tla"] = "tla";
@@ -79,14 +81,20 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             return dataFields;
         }
 
-        private static void SetDefaultValueIfNull(IDictionary<string, string> dataFields, string fieldName, string defaultValue)
+        public Dictionary<string, string> InitialiseCaseDataFieldsFromSample(Dictionary<string, string> dataFields)
         {
-            if (dataFields.ContainsKey(fieldName) && !string.IsNullOrWhiteSpace(dataFields[fieldName]))
+            if (dataFields is null)
             {
-                return;
+                dataFields = new Dictionary<string, string>();
             }
 
-            dataFields[fieldName] = defaultValue;
+            dataFields["qid.serial_number"] = PrimaryKey;
+            dataFields["QDataBag.uac1"] = Uac1;
+            dataFields["QDataBag.uac2"] = Uac2;
+            dataFields["QDataBag.uac3"] = Uac3;
+
+
+            return dataFields;
         }
 
         public string PrimaryKey { get; set; }
