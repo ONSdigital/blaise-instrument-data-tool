@@ -25,7 +25,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
                 ["QDataBag.uac1"] = Uac1,
                 ["QDataBag.uac2"] = Uac2,
                 ["QDataBag.uac3"] = Uac3,
-
+            };
             dataFields["qid.serial_number"] = PrimaryKey;
             dataFields["qdatabag.tla"] = "tla";
             dataFields["qdatabag.wave"] = "1";
