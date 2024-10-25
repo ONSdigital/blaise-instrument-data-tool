@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Blaise.Nuget.Api.Contracts.Models;
 using System.Collections.Generic;
-using Blaise.Nuget.Api.Contracts.Models;
+using System;
 
 namespace Blaise.Questionnaire.Data.Helpers.Models
 {
@@ -14,16 +14,28 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
 
         public CaseModel ToCaseModel()
         {
-           return new CaseModel(PrimaryKey, DataFields);
+            return new CaseModel(PrimaryKey, DataFields);
         }
 
         public Dictionary<string, string> InitialiseCaseDataFields(Dictionary<string, string> dataFields)
         {
-            if (dataFields is null)
+            if (dataFields == null)
             {
                 dataFields = new Dictionary<string, string>();
+                // Add default values only if no sample data is provided
+                AddDefaultValues(dataFields);
+            }
+            else
+            {
+                // Ensure the primary key is always set
+                dataFields["qid.serial_number"] = PrimaryKey;
             }
 
+            return dataFields;
+        }
+
+        private void AddDefaultValues(Dictionary<string, string> dataFields)
+        {
             dataFields["qid.serial_number"] = PrimaryKey;
             dataFields["qdatabag.tla"] = "tla";
             dataFields["qdatabag.wave"] = "1";
@@ -46,8 +58,8 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             dataFields["qdatabag.fieldcase"] = "y";
             dataFields["qdatabag.priority"] = "1";
             dataFields["qdatabag.fieldteam"] = "fieldteam";
-            dataFields["qdatabag.fieldregion"] = "region 1";
-            dataFields["qdatabag.wavecomdte"] = "01-01-3000";
+            dataFields["qdatabag.fieldregion"] = "Region 1";
+            dataFields["qdatabag.wavecomdte"] = "01-01-2099";
             dataFields["qsample.orgname"] = "orgname";
             dataFields["qsample.address1"] = "address1";
             dataFields["qsample.address2"] = "address2";
@@ -75,18 +87,6 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
             dataFields["catimana.caticall.regscalls[5].dialresult"] = "1";
             dataFields["datamodelname"] = "datamodelname";
             dataFields["offlinecapi.towhom"] = "rich";
-
-            return dataFields;
-        }
-
-        private static void SetDefaultValueIfNull(IDictionary<string, string> dataFields, string fieldName, string defaultValue)
-        {
-            if (dataFields.ContainsKey(fieldName) && !string.IsNullOrWhiteSpace(dataFields[fieldName]))
-            {
-                return;
-            }
-
-            dataFields[fieldName] = defaultValue;
         }
 
         public string PrimaryKey { get; set; }
@@ -102,7 +102,7 @@ namespace Blaise.Questionnaire.Data.Helpers.Models
         private static string GenerateRandomUac()
         {
             var random = new Random();
-           return random.Next(1000, 9999).ToString();
+            return random.Next(1000, 9999).ToString();
         }
     }
 }

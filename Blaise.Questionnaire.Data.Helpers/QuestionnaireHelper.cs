@@ -21,9 +21,10 @@ namespace Blaise.Questionnaire.Data.Helpers
             return new QuestionnaireHelper(connectionModel);
         }
 
-        public IEnumerable<string> GetQuestionnaires()
-        {
-            var questionnaires = _blaiseQuestionnaireApi.GetQuestionnairesAcrossServerParks();
+        public IEnumerable<string> GetQuestionnaires(string serverParkName)
+        {           
+
+            var questionnaires = _blaiseQuestionnaireApi.GetQuestionnaires(serverParkName);
 
             return questionnaires.Select(i => i.Name);
         }
