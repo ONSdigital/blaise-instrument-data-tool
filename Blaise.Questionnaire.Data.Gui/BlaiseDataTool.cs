@@ -20,28 +20,24 @@ namespace Blaise.Questionnaire.Data.Gui
 
         private void BlaiseDataTool_Load(object sender, EventArgs e)
         {
-            //primary key
-            PrimaryKeyFromTextbox.Text = @"900000";
+            txtPrimaryKeyFrom.Text = @"9001";
+            txtNumberOfCases.Text = @"10";
+            drpBinding.Items.AddRange(new object[] { "HTTP", "HTTPS" });
+            drpBinding.SelectedIndex = 0;
 
-            //number of cases
-            NumberOfCasesTextBox.Text = @"10";
-
-            //binding options
-            BindingDropDown.Items.AddRange(new object[] { "HTTP", "HTTPS" });
-            BindingDropDown.SelectedIndex = 0;
-
-            //connection model
             _connectionModel = GetConnectionModelFromConfig();
 
-            ServerNameTextBox.Text = _connectionModel?.ServerName;
-            UserNameTextBox.Text = _connectionModel?.UserName;
-            PasswordTextBox.Text = _connectionModel?.Password;
-            PortTextBox.Text = _connectionModel?.Port.ToString();
-            RemotePortTextBox.Text = _connectionModel?.RemotePort.ToString();
+            txtServerHostname.Text = _connectionModel?.ServerName;
+            txtUsername.Text = _connectionModel?.UserName;
+            txtPassword.Text = _connectionModel?.Password;
+            txtPort.Text = _connectionModel?.Port.ToString();
+            txtRemotePort.Text = _connectionModel?.RemotePort.ToString();
+
+            // wtf does connection happen !?
+            // why the connect button not work?
 
             ConfigureBindingDropDown();
-
-            RefreshLists();
+            //PopulateDropDowns();
         }
 
         private void Browse_Click(object sender, EventArgs e)
@@ -49,124 +45,102 @@ namespace Blaise.Questionnaire.Data.Gui
             var result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                QuestionnaireFileTextBox.Text = openFileDialog.FileName;
+                txtQuestionnaireFile.Text = openFileDialog.FileName;
             }
             else
             {
-                MessageBox.Show(@"There was an error in selecting a file", @"File selector",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There was an error in selecting a file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void CreateInDatabaseButton_Click(object sender, EventArgs e)
         {
-            var numberOfCases = NumberOfCasesTextBox.GetNullableIntegerValue();
-            var primaryKeyValue = PrimaryKeyFromTextbox.GetNullableIntegerValue();
-            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
-            var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
+            var numberOfCases = txtNumberOfCases.GetNullableIntegerValue();
+            var primaryKeyValue = txtPrimaryKeyFrom.GetNullableIntegerValue();
+            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
+            var serverParkName = drpServerPark.SelectedItem?.ToString();
 
-            if (numberOfCases == null || primaryKeyValue == null ||
-                questionnaireName == null || serverParkName == null)
+            if (numberOfCases == null || primaryKeyValue == null || questionnaireName == null || serverParkName == null)
             {
-                MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                CaseHelper
-                    .GetInstance(_connectionModel)
-                    .CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue);
-
+                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue);
                 MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                MessageBox.Show($"There was an error creating the cases - {exception.Message}",
-                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"There was an error creating the cases - {exception.Message}", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void CreateFromSampleButton_Click(object sender, EventArgs e)
         {
-            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
-            var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
-            var caseSampleFile = CaseSampleFileTextBox.GetNullableStringValue();
+            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
+            var serverParkName = drpServerPark.SelectedItem?.ToString();
+            var caseSampleFile = txtCaseFile.GetNullableStringValue();
+
             if (caseSampleFile is null)
             {
-                MessageBox.Show("No sample file was selected",
-                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No sample file was selected", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             try
             {
-                CaseHelper
-                    .GetInstance(_connectionModel)
-                    .CreateCasesInBlaise(questionnaireName, serverParkName, caseSampleFile);
-
+                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise(questionnaireName, serverParkName, caseSampleFile);
                 MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                MessageBox.Show($"There was an error creating the cases - {exception.Message}",
-                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"There was an error creating the cases - {exception.Message}", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ServerNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            var value = ServerNameTextBox.GetNullableStringValue();
-
+            var value = txtServerHostname.GetNullableStringValue();
             if (value == null) return;
-
             _connectionModel.ServerName = value;
         }
 
         private void BindingDropDown_TextChanged(object sender, EventArgs e)
         {
-            var value = BindingDropDown.GetNullableStringValue();
-
+            var value = drpBinding.GetNullableStringValue();
             if (value == null) return;
-
             _connectionModel.Binding = value;
         }
 
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            var value = UserNameTextBox.GetNullableStringValue();
-
+            var value = txtUsername.GetNullableStringValue();
             if (value == null) return;
-
             _connectionModel.UserName = value;
         }
 
         private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            var value = PasswordTextBox.GetNullableStringValue();
-
+            var value = txtPassword.GetNullableStringValue();
             if (value == null) return;
-
             _connectionModel.Password = value;
         }
 
         private void PortTextBox_TextChanged(object sender, EventArgs e)
         {
-            var value = PortTextBox.GetNullableIntegerValue();
-
+            var value = txtPort.GetNullableIntegerValue();
             if (value == null) return;
-
             _connectionModel.Port = (int)value;
         }
 
         private void RemotePortTextBox_TextChanged(object sender, EventArgs e)
         {
-            var value = RemotePortTextBox.GetNullableIntegerValue();
-
+            var value = txtRemotePort.GetNullableIntegerValue();
             if (value == null) return;
-
             _connectionModel.RemotePort = (int)value;
         }
 
@@ -175,39 +149,34 @@ namespace Blaise.Questionnaire.Data.Gui
             if (TestBlaiseConnectionIsCorrect())
             {
                 MessageBox.Show(@"Connection successful", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
             }
-
-            MessageBox.Show(@"Connection details appear to be incorrect", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                MessageBox.Show(@"Connection details appear to be incorrect", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void InstallQuestionnaireButton_Click(object sender, EventArgs e)
         {
-            var questionnaireFile = QuestionnaireFileTextBox.GetNullableStringValue();
-            var questionnaireName = QuestionnaireDropDown.SelectedItem?.ToString();
-            var serverParkName = ServerParkDropDown.SelectedItem?.ToString();
+            var questionnaireFile = txtQuestionnaireFile.GetNullableStringValue();
+            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
+            var serverParkName = drpServerPark.SelectedItem?.ToString();
 
-            if (questionnaireFile == null ||
-                questionnaireName == null ||
-                serverParkName == null)
+            if (questionnaireFile == null || questionnaireName == null || serverParkName == null)
             {
-                MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                QuestionnaireHelper.GetInstance(_connectionModel).InstallQuestionnaire(questionnaireName, serverParkName,
-                    questionnaireFile);
-
+                QuestionnaireHelper.GetInstance(_connectionModel).InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile);
                 MessageBox.Show(@"Installation successful", @"Install Questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                MessageBox.Show($"There was an error installing the questionnaire - {exception.Message}",
-                    @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"There was an error installing the questionnaire - {exception.Message}", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -216,12 +185,11 @@ namespace Blaise.Questionnaire.Data.Gui
             var result = openFileDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                CaseSampleFileTextBox.Text = openFileDialog.FileName;
+                txtCaseFile.Text = openFileDialog.FileName;
             }
             else
             {
-                MessageBox.Show(@"There was an error in selecting a file", @"File selector",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"There was an error in selecting a file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -229,13 +197,11 @@ namespace Blaise.Questionnaire.Data.Gui
         {
             if (!TestBlaiseConnectionIsCorrect())
             {
-                MessageBox.Show("There is an issue with the configuration",
-                    @"Refresh", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("There is an issue with the configuration", @"Refresh", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            RefreshLists();
+            PopulateDropDowns();
         }
 
         private ConnectionModel GetConnectionModelFromConfig()
@@ -245,37 +211,38 @@ namespace Blaise.Questionnaire.Data.Gui
             {
                 return blaiseConfigurationProvider.GetConnectionModel();
             }
-            catch //yuck
+            catch
             {
                 return new ConnectionModel
                 {
-                    Binding = BindingDropDown.SelectedItem.ToString(),
-                    Port = 8031,
-                    RemotePort = 8033,
+                    Binding = drpBinding.SelectedItem.ToString(),
+                    Port = int.Parse(txtPort.Text),
+                    RemotePort = int.Parse(txtRemotePort.Text),
                 };
             }
         }
+
         private void ConfigureBindingDropDown()
         {
-            foreach (var item in BindingDropDown.Items)
+            foreach (var item in drpBinding.Items)
             {
                 if (!_connectionModel.Binding.Equals(item.ToString(), StringComparison.CurrentCultureIgnoreCase))
                 {
                     continue;
                 }
 
-                BindingDropDown.SelectedItem = item;
+                drpBinding.SelectedItem = item;
                 break;
             }
         }
 
         private bool TestBlaiseConnectionIsCorrect()
         {
-            if (ServerNameTextBox.GetNullableStringValue() == null ||
-                UserNameTextBox.GetNullableStringValue() == null ||
-                PasswordTextBox.GetNullableStringValue() == null ||
-                PortTextBox.GetNullableIntegerValue() == null ||
-                RemotePortTextBox.GetNullableIntegerValue() == null)
+            if (txtServerHostname.GetNullableStringValue() == null ||
+                txtUsername.GetNullableStringValue() == null ||
+                txtPassword.GetNullableStringValue() == null ||
+                txtPort.GetNullableIntegerValue() == null ||
+                txtRemotePort.GetNullableIntegerValue() == null)
             {
                 return false;
             }
@@ -283,7 +250,7 @@ namespace Blaise.Questionnaire.Data.Gui
             return ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful;
         }
 
-        private void RefreshLists()
+        private void PopulateDropDowns()
         {
             if (!ConnectionHelper.GetInstance(_connectionModel).ConnectionModelValid)
             {
@@ -291,36 +258,72 @@ namespace Blaise.Questionnaire.Data.Gui
             }
 
             var serverParks = ServerParkHelper.GetInstance(_connectionModel).GetServerParks();
+            drpServerPark.Items.Clear();
+            drpServerPark.Items.AddRange(serverParks.Cast<object>().ToArray());
+            drpServerPark.SelectedIndex = 0;
 
-            ServerParkDropDown.Items.Clear();
-            ServerParkDropDown.Items.AddRange(serverParks.Cast<object>().ToArray());
-            ServerParkDropDown.SelectedIndex = 0;
-
-            var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires().ToList();
-
+            var serverParkName = drpServerPark.SelectedItem?.ToString();
+            var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires(serverParkName).ToList();
             if (!questionnaires.Any())
             {
                 return;
             }
 
-            QuestionnaireDropDown.Items.Clear();
-            QuestionnaireDropDown.Items.AddRange(questionnaires.Cast<object>().ToArray());
-            QuestionnaireDropDown.SelectedIndex = 0;
+            drpQuestionnaireName.Items.Clear();
+            drpQuestionnaireName.Items.AddRange(questionnaires.Cast<object>().ToArray());
+            drpQuestionnaireName.SelectedIndex = 0;
         }
 
         private void bindingLabel_Click(object sender, EventArgs e)
         {
-
+            // Add functionality if needed
         }
 
         private void serverNameLabel_Click(object sender, EventArgs e)
         {
-
+            // Add functionality if needed
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+            // Add functionality if needed
+        }
 
+        private void ServerParkDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var serverParkName = drpServerPark.SelectedItem?.ToString();
+            var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires(serverParkName).ToList();
+            if (!questionnaires.Any())
+            {
+                return;
+            }
+
+            drpQuestionnaireName.Items.Clear();
+            drpQuestionnaireName.Items.AddRange(questionnaires.Cast<object>().ToArray());
+            drpQuestionnaireName.SelectedIndex = 0;
+        }
+
+        private void QuestionnaireDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Add functionality if needed
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_HOST_NAME", txtServerHostname.Text);
+            Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_USER", txtUsername.Text);
+            Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_PASSWORD", txtPassword.Text);
+            Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_BINDING", drpBinding.Text);
+            Environment.SetEnvironmentVariable("ENV_BLAISE_CONNECTION_PORT", txtPort.Text);
+            Environment.SetEnvironmentVariable("ENV_BLAISE_REMOTE_CONNECTION_PORT", txtRemotePort.Text);
+            _connectionModel = GetConnectionModelFromConfig();
+            ConfigureBindingDropDown();
+            PopulateDropDowns();
+            btnConnect.Enabled = false;
+            if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
+            {
+                MessageBox.Show(@"Connection successful", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

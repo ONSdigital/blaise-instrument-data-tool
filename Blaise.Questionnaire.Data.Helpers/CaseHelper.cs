@@ -23,9 +23,10 @@ namespace Blaise.Questionnaire.Data.Helpers
             return new CaseHelper(connectionModel);
         }
 
-        public void CreateCasesInBlaise(int numberOfCases, string questionnaireName, string serverParkName, 
-            int primaryKey)
+        public void CreateCasesInBlaise(int numberOfCases, string questionnaireName, string serverParkName, int primaryKey)
         {
+            _blaiseCaseApi.RemoveCases(questionnaireName, serverParkName);
+
             var caseModels = new List<CaseModel>();
             try
             {
@@ -59,16 +60,42 @@ namespace Blaise.Questionnaire.Data.Helpers
             var sampleCaseList = GetSampleDataFields(caseSampleFile);
             var count = 1;
 
+            if (string.IsNullOrWhiteSpace(caseSampleFile))
+            {
+                Console.WriteLine("No sample file provided. Using default data.");
+            }
+            else
+            {
+                Console.WriteLine($"Using data from sample file: {caseSampleFile}");
+                Console.WriteLine($"Loaded {sampleCaseList.Count} sample cases from file '{caseSampleFile}'.");
+            }
+
             try
             {
-                foreach (var sampleCase in sampleCaseList)   
+                foreach (var sampleCase in sampleCaseList)
                 {
-                    var primaryKey = int.Parse(sampleCase["qiD.Serial_Number"]);
+                    if (!sampleCase.ContainsKey("qiD.Serial_Number"))
+                    {
+                        Console.WriteLine($"Sample case missing 'qiD.Serial_Number': {JsonConvert.SerializeObject(sampleCase)}");
+                        continue;
+                    }
+
+                    if (!int.TryParse(sampleCase["qiD.Serial_Number"], out var primaryKey))
+                    {
+                        Console.WriteLine($"Invalid 'qiD.Serial_Number': {sampleCase["qiD.Serial_Number"]}");
+                        continue;
+                    }
+
                     var caseDataModel = new CaseDataModel(primaryKey, sampleCase);
-                    caseModels.Add(caseDataModel.ToCaseModel());
+                    var caseModel = caseDataModel.ToCaseModel();
+
+                    Console.WriteLine($"Creating case model: {JsonConvert.SerializeObject(caseModel)}");
+
+                    caseModels.Add(caseModel);
 
                     if (MaxChunkSizeOrMaxCountReached(count, sampleCaseList.Count))
                     {
+                        Console.WriteLine($"Writing {caseModels.Count} cases to Blaise.");
                         _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
                         caseModels = new List<CaseModel>();
                         Console.WriteLine($"Total cases written {count}");
@@ -76,8 +103,6 @@ namespace Blaise.Questionnaire.Data.Helpers
 
                     count++;
                 }
-
-                _blaiseCaseApi.CreateCases(caseModels, questionnaireName, serverParkName);
             }
             catch (Exception ex)
             {
