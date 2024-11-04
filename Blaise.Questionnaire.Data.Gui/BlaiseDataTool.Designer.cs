@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlaiseDataTool));
             this.grpConnectionDetails = new System.Windows.Forms.GroupBox();
             this.lblServerHostname = new System.Windows.Forms.Label();
-            this.txtServerHostname = new System.Windows.Forms.TextBox();
+            this.txtHostname = new System.Windows.Forms.TextBox();
             this.lblBinding = new System.Windows.Forms.Label();
-            this.drpBinding = new System.Windows.Forms.ComboBox();
+            this.cboBinding = new System.Windows.Forms.ComboBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -61,14 +61,14 @@
             this.txtCaseFile = new System.Windows.Forms.TextBox();
             this.drpQuestionnaireName = new System.Windows.Forms.ComboBox();
             this.btnCreateCasesFromFile = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpInstallQuestionnaire = new System.Windows.Forms.GroupBox();
+            this.grpCreateCases = new System.Windows.Forms.GroupBox();
             this.createcases = new System.Windows.Forms.TabControl();
             this.Default = new System.Windows.Forms.TabPage();
             this.File = new System.Windows.Forms.TabPage();
             this.grpConnectionDetails.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpInstallQuestionnaire.SuspendLayout();
+            this.grpCreateCases.SuspendLayout();
             this.createcases.SuspendLayout();
             this.Default.SuspendLayout();
             this.File.SuspendLayout();
@@ -78,9 +78,9 @@
             // 
             this.grpConnectionDetails.BackColor = System.Drawing.Color.Transparent;
             this.grpConnectionDetails.Controls.Add(this.lblServerHostname);
-            this.grpConnectionDetails.Controls.Add(this.txtServerHostname);
+            this.grpConnectionDetails.Controls.Add(this.txtHostname);
             this.grpConnectionDetails.Controls.Add(this.lblBinding);
-            this.grpConnectionDetails.Controls.Add(this.drpBinding);
+            this.grpConnectionDetails.Controls.Add(this.cboBinding);
             this.grpConnectionDetails.Controls.Add(this.lblUsername);
             this.grpConnectionDetails.Controls.Add(this.txtUsername);
             this.grpConnectionDetails.Controls.Add(this.lblPassword);
@@ -93,11 +93,12 @@
             this.grpConnectionDetails.Controls.Add(this.btnConnect);
             this.grpConnectionDetails.Controls.Add(this.btnDisconnect);
             this.grpConnectionDetails.Controls.Add(this.lblServerPark);
-            this.grpConnectionDetails.Location = new System.Drawing.Point(21, 15);
+            this.grpConnectionDetails.ForeColor = System.Drawing.Color.White;
+            this.grpConnectionDetails.Location = new System.Drawing.Point(18, 13);
             this.grpConnectionDetails.Margin = new System.Windows.Forms.Padding(4);
             this.grpConnectionDetails.Name = "grpConnectionDetails";
             this.grpConnectionDetails.Padding = new System.Windows.Forms.Padding(4);
-            this.grpConnectionDetails.Size = new System.Drawing.Size(418, 320);
+            this.grpConnectionDetails.Size = new System.Drawing.Size(366, 280);
             this.grpConnectionDetails.TabIndex = 0;
             this.grpConnectionDetails.TabStop = false;
             this.grpConnectionDetails.Text = "Connection Details";
@@ -105,138 +106,133 @@
             // lblServerHostname
             // 
             this.lblServerHostname.AutoSize = true;
-            this.lblServerHostname.Location = new System.Drawing.Point(18, 65);
+            this.lblServerHostname.Location = new System.Drawing.Point(16, 57);
             this.lblServerHostname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblServerHostname.Name = "lblServerHostname";
             this.lblServerHostname.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblServerHostname.Size = new System.Drawing.Size(69, 16);
+            this.lblServerHostname.Size = new System.Drawing.Size(62, 14);
             this.lblServerHostname.TabIndex = 19;
             this.lblServerHostname.Text = "Hostname";
-            this.lblServerHostname.Click += new System.EventHandler(this.serverNameLabel_Click);
             // 
-            // txtServerHostname
+            // txtHostname
             // 
-            this.txtServerHostname.Location = new System.Drawing.Point(118, 62);
-            this.txtServerHostname.Margin = new System.Windows.Forms.Padding(4);
-            this.txtServerHostname.Name = "txtServerHostname";
-            this.txtServerHostname.Size = new System.Drawing.Size(280, 22);
-            this.txtServerHostname.TabIndex = 20;
-            this.txtServerHostname.TextChanged += new System.EventHandler(this.ServerNameTextBox_TextChanged);
+            this.txtHostname.Location = new System.Drawing.Point(103, 54);
+            this.txtHostname.Margin = new System.Windows.Forms.Padding(4);
+            this.txtHostname.Name = "txtHostname";
+            this.txtHostname.Size = new System.Drawing.Size(246, 22);
+            this.txtHostname.TabIndex = 20;
             // 
             // lblBinding
             // 
             this.lblBinding.AutoSize = true;
-            this.lblBinding.Location = new System.Drawing.Point(18, 35);
+            this.lblBinding.Location = new System.Drawing.Point(16, 31);
             this.lblBinding.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBinding.Name = "lblBinding";
-            this.lblBinding.Size = new System.Drawing.Size(52, 16);
+            this.lblBinding.Size = new System.Drawing.Size(46, 14);
             this.lblBinding.TabIndex = 21;
             this.lblBinding.Text = "Binding";
-            this.lblBinding.Click += new System.EventHandler(this.bindingLabel_Click);
             // 
-            // drpBinding
+            // cboBinding
             // 
-            this.drpBinding.FormattingEnabled = true;
-            this.drpBinding.Location = new System.Drawing.Point(118, 30);
-            this.drpBinding.Margin = new System.Windows.Forms.Padding(4);
-            this.drpBinding.Name = "drpBinding";
-            this.drpBinding.Size = new System.Drawing.Size(74, 24);
-            this.drpBinding.TabIndex = 22;
-            this.drpBinding.TextChanged += new System.EventHandler(this.BindingDropDown_TextChanged);
+            this.cboBinding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBinding.FormattingEnabled = true;
+            this.cboBinding.Location = new System.Drawing.Point(103, 26);
+            this.cboBinding.Margin = new System.Windows.Forms.Padding(4);
+            this.cboBinding.Name = "cboBinding";
+            this.cboBinding.Size = new System.Drawing.Size(65, 22);
+            this.cboBinding.TabIndex = 22;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(18, 95);
+            this.lblUsername.Location = new System.Drawing.Point(16, 83);
             this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(70, 16);
+            this.lblUsername.Size = new System.Drawing.Size(61, 14);
             this.lblUsername.TabIndex = 23;
             this.lblUsername.Text = "Username";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(118, 92);
+            this.txtUsername.Location = new System.Drawing.Point(103, 80);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(116, 22);
+            this.txtUsername.Size = new System.Drawing.Size(102, 22);
             this.txtUsername.TabIndex = 24;
-            this.txtUsername.TextChanged += new System.EventHandler(this.UserNameTextBox_TextChanged);
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(18, 125);
+            this.lblPassword.Location = new System.Drawing.Point(16, 109);
             this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(67, 16);
+            this.lblPassword.Size = new System.Drawing.Size(58, 14);
             this.lblPassword.TabIndex = 25;
             this.lblPassword.Text = "Password";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(118, 122);
+            this.txtPassword.Location = new System.Drawing.Point(103, 107);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(116, 22);
+            this.txtPassword.Size = new System.Drawing.Size(102, 22);
             this.txtPassword.TabIndex = 26;
-            this.txtPassword.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // drpServerPark
             // 
+            this.drpServerPark.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.drpServerPark.DropDownWidth = 100;
             this.drpServerPark.FormattingEnabled = true;
-            this.drpServerPark.Location = new System.Drawing.Point(118, 277);
+            this.drpServerPark.Location = new System.Drawing.Point(103, 242);
             this.drpServerPark.Margin = new System.Windows.Forms.Padding(4);
             this.drpServerPark.Name = "drpServerPark";
-            this.drpServerPark.Size = new System.Drawing.Size(116, 24);
+            this.drpServerPark.Size = new System.Drawing.Size(102, 22);
             this.drpServerPark.TabIndex = 43;
             this.drpServerPark.SelectedIndexChanged += new System.EventHandler(this.ServerParkDropDown_SelectedIndexChanged);
             // 
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(18, 155);
+            this.lblPort.Location = new System.Drawing.Point(16, 136);
             this.lblPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(31, 16);
+            this.lblPort.Size = new System.Drawing.Size(30, 14);
             this.lblPort.TabIndex = 46;
             this.lblPort.Text = "Port";
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(118, 152);
+            this.txtPort.Location = new System.Drawing.Point(103, 133);
             this.txtPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(74, 22);
+            this.txtPort.Size = new System.Drawing.Size(65, 22);
             this.txtPort.TabIndex = 47;
-            this.txtPort.TextChanged += new System.EventHandler(this.PortTextBox_TextChanged);
             // 
             // lblRemotePort
             // 
             this.lblRemotePort.AutoSize = true;
-            this.lblRemotePort.Location = new System.Drawing.Point(18, 185);
+            this.lblRemotePort.Location = new System.Drawing.Point(16, 162);
             this.lblRemotePort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRemotePort.Name = "lblRemotePort";
-            this.lblRemotePort.Size = new System.Drawing.Size(81, 16);
+            this.lblRemotePort.Size = new System.Drawing.Size(77, 14);
             this.lblRemotePort.TabIndex = 48;
             this.lblRemotePort.Text = "Remote port";
             // 
             // txtRemotePort
             // 
-            this.txtRemotePort.Location = new System.Drawing.Point(118, 182);
+            this.txtRemotePort.Location = new System.Drawing.Point(103, 159);
             this.txtRemotePort.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemotePort.Name = "txtRemotePort";
-            this.txtRemotePort.Size = new System.Drawing.Size(74, 22);
+            this.txtRemotePort.Size = new System.Drawing.Size(65, 22);
             this.txtRemotePort.TabIndex = 49;
-            this.txtRemotePort.TextChanged += new System.EventHandler(this.RemotePortTextBox_TextChanged);
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(18, 222);
+            this.btnConnect.ForeColor = System.Drawing.Color.Black;
+            this.btnConnect.Location = new System.Drawing.Point(16, 194);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(111, 36);
+            this.btnConnect.Size = new System.Drawing.Size(97, 32);
             this.btnConnect.TabIndex = 55;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -244,10 +240,11 @@
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(140, 222);
+            this.btnDisconnect.ForeColor = System.Drawing.Color.Black;
+            this.btnDisconnect.Location = new System.Drawing.Point(122, 194);
             this.btnDisconnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnDisconnect.Name = "btnDisconnect";
-            this.btnDisconnect.Size = new System.Drawing.Size(109, 36);
+            this.btnDisconnect.Size = new System.Drawing.Size(95, 32);
             this.btnDisconnect.TabIndex = 56;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
@@ -256,33 +253,34 @@
             // lblServerPark
             // 
             this.lblServerPark.AutoSize = true;
-            this.lblServerPark.Location = new System.Drawing.Point(18, 282);
+            this.lblServerPark.Location = new System.Drawing.Point(16, 247);
             this.lblServerPark.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblServerPark.Name = "lblServerPark";
-            this.lblServerPark.Size = new System.Drawing.Size(77, 16);
+            this.lblServerPark.Size = new System.Drawing.Size(69, 14);
             this.lblServerPark.TabIndex = 17;
             this.lblServerPark.Text = "Server park";
             // 
             // txtQuestionnaireFile
             // 
-            this.txtQuestionnaireFile.Location = new System.Drawing.Point(21, 33);
+            this.txtQuestionnaireFile.Location = new System.Drawing.Point(18, 29);
             this.txtQuestionnaireFile.Margin = new System.Windows.Forms.Padding(4);
             this.txtQuestionnaireFile.Name = "txtQuestionnaireFile";
-            this.txtQuestionnaireFile.Size = new System.Drawing.Size(312, 22);
+            this.txtQuestionnaireFile.Size = new System.Drawing.Size(274, 22);
             this.txtQuestionnaireFile.TabIndex = 0;
             // 
             // btnBrowseQuestionnaireFile
             // 
+            this.btnBrowseQuestionnaireFile.ForeColor = System.Drawing.Color.Black;
             this.btnBrowseQuestionnaireFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnBrowseQuestionnaireFile.Location = new System.Drawing.Point(341, 30);
+            this.btnBrowseQuestionnaireFile.Location = new System.Drawing.Point(298, 28);
             this.btnBrowseQuestionnaireFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseQuestionnaireFile.Name = "btnBrowseQuestionnaireFile";
-            this.btnBrowseQuestionnaireFile.Size = new System.Drawing.Size(57, 27);
+            this.btnBrowseQuestionnaireFile.Size = new System.Drawing.Size(50, 24);
             this.btnBrowseQuestionnaireFile.TabIndex = 2;
             this.btnBrowseQuestionnaireFile.Text = "...";
             this.btnBrowseQuestionnaireFile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnBrowseQuestionnaireFile.UseVisualStyleBackColor = true;
-            this.btnBrowseQuestionnaireFile.Click += new System.EventHandler(this.Browse_Click);
+            this.btnBrowseQuestionnaireFile.Click += new System.EventHandler(this.btnBrowseQuestionnaireFile_Click);
             // 
             // openFileDialog
             // 
@@ -291,46 +289,50 @@
             // lblNumberOfCases
             // 
             this.lblNumberOfCases.AutoSize = true;
-            this.lblNumberOfCases.Location = new System.Drawing.Point(18, 50);
+            this.lblNumberOfCases.ForeColor = System.Drawing.Color.Black;
+            this.lblNumberOfCases.Location = new System.Drawing.Point(16, 44);
             this.lblNumberOfCases.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumberOfCases.Name = "lblNumberOfCases";
-            this.lblNumberOfCases.Size = new System.Drawing.Size(109, 16);
+            this.lblNumberOfCases.Size = new System.Drawing.Size(98, 14);
             this.lblNumberOfCases.TabIndex = 3;
             this.lblNumberOfCases.Text = "Number of cases";
             // 
             // txtNumberOfCases
             // 
-            this.txtNumberOfCases.Location = new System.Drawing.Point(137, 46);
+            this.txtNumberOfCases.ForeColor = System.Drawing.Color.Black;
+            this.txtNumberOfCases.Location = new System.Drawing.Point(120, 40);
             this.txtNumberOfCases.Margin = new System.Windows.Forms.Padding(4);
             this.txtNumberOfCases.Name = "txtNumberOfCases";
-            this.txtNumberOfCases.Size = new System.Drawing.Size(116, 22);
+            this.txtNumberOfCases.Size = new System.Drawing.Size(102, 22);
             this.txtNumberOfCases.TabIndex = 4;
             // 
             // lblPrimaryKeyFrom
             // 
             this.lblPrimaryKeyFrom.AutoSize = true;
-            this.lblPrimaryKeyFrom.Location = new System.Drawing.Point(18, 20);
+            this.lblPrimaryKeyFrom.ForeColor = System.Drawing.Color.Black;
+            this.lblPrimaryKeyFrom.Location = new System.Drawing.Point(16, 18);
             this.lblPrimaryKeyFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrimaryKeyFrom.Name = "lblPrimaryKeyFrom";
-            this.lblPrimaryKeyFrom.Size = new System.Drawing.Size(107, 16);
+            this.lblPrimaryKeyFrom.Size = new System.Drawing.Size(98, 14);
             this.lblPrimaryKeyFrom.TabIndex = 5;
             this.lblPrimaryKeyFrom.Text = "Primary key from";
-            this.lblPrimaryKeyFrom.Click += new System.EventHandler(this.lblPrimaryKeyFrom_Click);
             // 
             // txtPrimaryKeyFrom
             // 
-            this.txtPrimaryKeyFrom.Location = new System.Drawing.Point(137, 16);
+            this.txtPrimaryKeyFrom.ForeColor = System.Drawing.Color.Black;
+            this.txtPrimaryKeyFrom.Location = new System.Drawing.Point(120, 14);
             this.txtPrimaryKeyFrom.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrimaryKeyFrom.Name = "txtPrimaryKeyFrom";
-            this.txtPrimaryKeyFrom.Size = new System.Drawing.Size(116, 22);
+            this.txtPrimaryKeyFrom.Size = new System.Drawing.Size(102, 22);
             this.txtPrimaryKeyFrom.TabIndex = 6;
             // 
             // btnCreateCases
             // 
-            this.btnCreateCases.Location = new System.Drawing.Point(18, 80);
+            this.btnCreateCases.ForeColor = System.Drawing.Color.Black;
+            this.btnCreateCases.Location = new System.Drawing.Point(16, 70);
             this.btnCreateCases.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateCases.Name = "btnCreateCases";
-            this.btnCreateCases.Size = new System.Drawing.Size(133, 36);
+            this.btnCreateCases.Size = new System.Drawing.Size(116, 32);
             this.btnCreateCases.TabIndex = 11;
             this.btnCreateCases.Text = "Create";
             this.btnCreateCases.UseVisualStyleBackColor = true;
@@ -339,13 +341,12 @@
             // lblQuestionnaireName
             // 
             this.lblQuestionnaireName.AutoSize = true;
-            this.lblQuestionnaireName.Location = new System.Drawing.Point(18, 36);
+            this.lblQuestionnaireName.Location = new System.Drawing.Point(16, 32);
             this.lblQuestionnaireName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblQuestionnaireName.Name = "lblQuestionnaireName";
-            this.lblQuestionnaireName.Size = new System.Drawing.Size(90, 16);
+            this.lblQuestionnaireName.Size = new System.Drawing.Size(82, 14);
             this.lblQuestionnaireName.TabIndex = 15;
             this.lblQuestionnaireName.Text = "Questionnaire";
-            this.lblQuestionnaireName.Click += new System.EventHandler(this.lblQuestionnaireName_Click);
             // 
             // lblBlaiseConnectionSettings
             // 
@@ -358,10 +359,11 @@
             // 
             // btnInstallQuestionnaire
             // 
-            this.btnInstallQuestionnaire.Location = new System.Drawing.Point(21, 66);
+            this.btnInstallQuestionnaire.ForeColor = System.Drawing.Color.Black;
+            this.btnInstallQuestionnaire.Location = new System.Drawing.Point(18, 58);
             this.btnInstallQuestionnaire.Margin = new System.Windows.Forms.Padding(4);
             this.btnInstallQuestionnaire.Name = "btnInstallQuestionnaire";
-            this.btnInstallQuestionnaire.Size = new System.Drawing.Size(108, 36);
+            this.btnInstallQuestionnaire.Size = new System.Drawing.Size(94, 32);
             this.btnInstallQuestionnaire.TabIndex = 36;
             this.btnInstallQuestionnaire.Text = "Install";
             this.btnInstallQuestionnaire.UseVisualStyleBackColor = true;
@@ -369,11 +371,12 @@
             // 
             // btnBrowseCaseFile
             // 
+            this.btnBrowseCaseFile.ForeColor = System.Drawing.Color.Black;
             this.btnBrowseCaseFile.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnBrowseCaseFile.Location = new System.Drawing.Point(301, 13);
+            this.btnBrowseCaseFile.Location = new System.Drawing.Point(263, 11);
             this.btnBrowseCaseFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowseCaseFile.Name = "btnBrowseCaseFile";
-            this.btnBrowseCaseFile.Size = new System.Drawing.Size(57, 27);
+            this.btnBrowseCaseFile.Size = new System.Drawing.Size(50, 24);
             this.btnBrowseCaseFile.TabIndex = 38;
             this.btnBrowseCaseFile.Text = "...";
             this.btnBrowseCaseFile.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -382,70 +385,72 @@
             // 
             // txtCaseFile
             // 
-            this.txtCaseFile.Location = new System.Drawing.Point(18, 16);
+            this.txtCaseFile.ForeColor = System.Drawing.Color.Black;
+            this.txtCaseFile.Location = new System.Drawing.Point(16, 14);
             this.txtCaseFile.Margin = new System.Windows.Forms.Padding(4);
             this.txtCaseFile.Name = "txtCaseFile";
-            this.txtCaseFile.Size = new System.Drawing.Size(273, 22);
+            this.txtCaseFile.Size = new System.Drawing.Size(239, 22);
             this.txtCaseFile.TabIndex = 40;
             // 
             // drpQuestionnaireName
             // 
+            this.drpQuestionnaireName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.drpQuestionnaireName.DropDownWidth = 200;
             this.drpQuestionnaireName.FormattingEnabled = true;
-            this.drpQuestionnaireName.Location = new System.Drawing.Point(118, 31);
+            this.drpQuestionnaireName.Location = new System.Drawing.Point(103, 27);
             this.drpQuestionnaireName.Margin = new System.Windows.Forms.Padding(4);
             this.drpQuestionnaireName.Name = "drpQuestionnaireName";
-            this.drpQuestionnaireName.Size = new System.Drawing.Size(280, 24);
+            this.drpQuestionnaireName.Size = new System.Drawing.Size(246, 22);
             this.drpQuestionnaireName.TabIndex = 45;
-            this.drpQuestionnaireName.SelectedIndexChanged += new System.EventHandler(this.QuestionnaireDropDown_SelectedIndexChanged);
             // 
             // btnCreateCasesFromFile
             // 
-            this.btnCreateCasesFromFile.Location = new System.Drawing.Point(18, 80);
+            this.btnCreateCasesFromFile.ForeColor = System.Drawing.Color.Black;
+            this.btnCreateCasesFromFile.Location = new System.Drawing.Point(16, 70);
             this.btnCreateCasesFromFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateCasesFromFile.Name = "btnCreateCasesFromFile";
-            this.btnCreateCasesFromFile.Size = new System.Drawing.Size(133, 36);
+            this.btnCreateCasesFromFile.Size = new System.Drawing.Size(116, 32);
             this.btnCreateCasesFromFile.TabIndex = 54;
             this.btnCreateCasesFromFile.Text = "Create";
             this.btnCreateCasesFromFile.UseVisualStyleBackColor = true;
             this.btnCreateCasesFromFile.Click += new System.EventHandler(this.CreateFromSampleButton_Click);
             // 
-            // groupBox1
+            // grpInstallQuestionnaire
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.txtQuestionnaireFile);
-            this.groupBox1.Controls.Add(this.btnBrowseQuestionnaireFile);
-            this.groupBox1.Controls.Add(this.btnInstallQuestionnaire);
-            this.groupBox1.Location = new System.Drawing.Point(21, 346);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 118);
-            this.groupBox1.TabIndex = 55;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Install Questionnaire";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.grpInstallQuestionnaire.BackColor = System.Drawing.Color.Transparent;
+            this.grpInstallQuestionnaire.Controls.Add(this.txtQuestionnaireFile);
+            this.grpInstallQuestionnaire.Controls.Add(this.btnBrowseQuestionnaireFile);
+            this.grpInstallQuestionnaire.Controls.Add(this.btnInstallQuestionnaire);
+            this.grpInstallQuestionnaire.ForeColor = System.Drawing.Color.White;
+            this.grpInstallQuestionnaire.Location = new System.Drawing.Point(18, 303);
+            this.grpInstallQuestionnaire.Name = "grpInstallQuestionnaire";
+            this.grpInstallQuestionnaire.Size = new System.Drawing.Size(366, 103);
+            this.grpInstallQuestionnaire.TabIndex = 55;
+            this.grpInstallQuestionnaire.TabStop = false;
+            this.grpInstallQuestionnaire.Text = "Install Questionnaire";
             // 
-            // groupBox2
+            // grpCreateCases
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.createcases);
-            this.groupBox2.Controls.Add(this.lblQuestionnaireName);
-            this.groupBox2.Controls.Add(this.drpQuestionnaireName);
-            this.groupBox2.Location = new System.Drawing.Point(21, 475);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(418, 249);
-            this.groupBox2.TabIndex = 56;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Create Cases";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            this.grpCreateCases.BackColor = System.Drawing.Color.Transparent;
+            this.grpCreateCases.Controls.Add(this.createcases);
+            this.grpCreateCases.Controls.Add(this.lblQuestionnaireName);
+            this.grpCreateCases.Controls.Add(this.drpQuestionnaireName);
+            this.grpCreateCases.ForeColor = System.Drawing.Color.White;
+            this.grpCreateCases.Location = new System.Drawing.Point(18, 416);
+            this.grpCreateCases.Name = "grpCreateCases";
+            this.grpCreateCases.Size = new System.Drawing.Size(366, 222);
+            this.grpCreateCases.TabIndex = 56;
+            this.grpCreateCases.TabStop = false;
+            this.grpCreateCases.Text = "Create Cases";
             // 
             // createcases
             // 
             this.createcases.Controls.Add(this.Default);
             this.createcases.Controls.Add(this.File);
-            this.createcases.Location = new System.Drawing.Point(18, 80);
+            this.createcases.Location = new System.Drawing.Point(16, 70);
             this.createcases.Name = "createcases";
             this.createcases.SelectedIndex = 0;
-            this.createcases.Size = new System.Drawing.Size(380, 157);
+            this.createcases.Size = new System.Drawing.Size(332, 137);
             this.createcases.TabIndex = 57;
             // 
             // Default
@@ -455,10 +460,10 @@
             this.Default.Controls.Add(this.lblNumberOfCases);
             this.Default.Controls.Add(this.txtNumberOfCases);
             this.Default.Controls.Add(this.btnCreateCases);
-            this.Default.Location = new System.Drawing.Point(4, 25);
+            this.Default.Location = new System.Drawing.Point(4, 23);
             this.Default.Name = "Default";
             this.Default.Padding = new System.Windows.Forms.Padding(3);
-            this.Default.Size = new System.Drawing.Size(372, 128);
+            this.Default.Size = new System.Drawing.Size(324, 110);
             this.Default.TabIndex = 0;
             this.Default.Text = "Default";
             this.Default.UseVisualStyleBackColor = true;
@@ -468,41 +473,42 @@
             this.File.Controls.Add(this.txtCaseFile);
             this.File.Controls.Add(this.btnBrowseCaseFile);
             this.File.Controls.Add(this.btnCreateCasesFromFile);
-            this.File.Location = new System.Drawing.Point(4, 25);
+            this.File.Location = new System.Drawing.Point(4, 23);
             this.File.Name = "File";
             this.File.Padding = new System.Windows.Forms.Padding(3);
-            this.File.Size = new System.Drawing.Size(372, 128);
+            this.File.Size = new System.Drawing.Size(324, 110);
             this.File.TabIndex = 1;
             this.File.Text = "JSON File";
             this.File.UseVisualStyleBackColor = true;
             // 
             // BlaiseDataTool
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Blue;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(460, 743);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(402, 653);
+            this.Controls.Add(this.grpCreateCases);
+            this.Controls.Add(this.grpInstallQuestionnaire);
             this.Controls.Add(this.grpConnectionDetails);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BlaiseDataTool";
+            this.RightToLeftLayout = true;
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = " ";
+            this.Text = "Blaise Questionnaire Data Tool";
             this.Load += new System.EventHandler(this.BlaiseDataTool_Load);
             this.grpConnectionDetails.ResumeLayout(false);
             this.grpConnectionDetails.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpInstallQuestionnaire.ResumeLayout(false);
+            this.grpInstallQuestionnaire.PerformLayout();
+            this.grpCreateCases.ResumeLayout(false);
+            this.grpCreateCases.PerformLayout();
             this.createcases.ResumeLayout(false);
             this.Default.ResumeLayout(false);
             this.Default.PerformLayout();
@@ -526,9 +532,9 @@
         private System.Windows.Forms.Label lblQuestionnaireName;
         private System.Windows.Forms.Label lblServerPark;
         private System.Windows.Forms.Label lblServerHostname;
-        private System.Windows.Forms.TextBox txtServerHostname;
+        private System.Windows.Forms.TextBox txtHostname;
         private System.Windows.Forms.Label lblBinding;
-        private System.Windows.Forms.ComboBox drpBinding;
+        private System.Windows.Forms.ComboBox cboBinding;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblPassword;
@@ -546,8 +552,8 @@
         private System.Windows.Forms.Button btnCreateCasesFromFile;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnDisconnect;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpInstallQuestionnaire;
+        private System.Windows.Forms.GroupBox grpCreateCases;
         private System.Windows.Forms.TabControl createcases;
         private System.Windows.Forms.TabPage Default;
         private System.Windows.Forms.TabPage File;
