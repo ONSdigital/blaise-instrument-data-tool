@@ -33,11 +33,7 @@ namespace Blaise.Questionnaire.Data.Gui
             txtPort.Text = _connectionModel?.Port.ToString();
             txtRemotePort.Text = _connectionModel?.RemotePort.ToString();
 
-            // wtf does connection happen !?
-            // why the connect button not work?
-
             ConfigureBindingDropDown();
-            //PopulateDropDowns();
         }
 
         private void Browse_Click(object sender, EventArgs e)
@@ -310,20 +306,54 @@ namespace Blaise.Questionnaire.Data.Gui
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_HOST_NAME", txtServerHostname.Text);
-            Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_USER", txtUsername.Text);
-            Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_PASSWORD", txtPassword.Text);
-            Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_BINDING", drpBinding.Text);
-            Environment.SetEnvironmentVariable("ENV_BLAISE_CONNECTION_PORT", txtPort.Text);
-            Environment.SetEnvironmentVariable("ENV_BLAISE_REMOTE_CONNECTION_PORT", txtRemotePort.Text);
-            _connectionModel = GetConnectionModelFromConfig();
-            ConfigureBindingDropDown();
-            PopulateDropDowns();
-            btnConnect.Enabled = false;
-            if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
+            try
             {
-                MessageBox.Show(@"Connection successful", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_HOST_NAME", txtServerHostname.Text);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_USER", txtUsername.Text);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_ADMIN_PASSWORD", txtPassword.Text);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_SERVER_BINDING", drpBinding.Text);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_CONNECTION_PORT", txtPort.Text);
+                Environment.SetEnvironmentVariable("ENV_BLAISE_REMOTE_CONNECTION_PORT", txtRemotePort.Text);
+                
+                _connectionModel = GetConnectionModelFromConfig();
+                ConfigureBindingDropDown();
+                PopulateDropDowns();
+                btnConnect.Enabled = false;
+
+                if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
+                {
+                    MessageBox.Show(@"Connection successful", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Connection failed: " + ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            _connectionModel = null;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblQuestionnaireName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPrimaryKeyFrom_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
