@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlaiseDataTool));
             this.grpConnectionDetails = new System.Windows.Forms.GroupBox();
             this.lblServerHostname = new System.Windows.Forms.Label();
             this.txtServerHostname = new System.Windows.Forms.TextBox();
@@ -37,12 +38,14 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.drpServerPark = new System.Windows.Forms.ComboBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.lblRemotePort = new System.Windows.Forms.Label();
             this.txtRemotePort = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnDisconnect = new System.Windows.Forms.Button();
+            this.lblServerPark = new System.Windows.Forms.Label();
             this.txtQuestionnaireFile = new System.Windows.Forms.TextBox();
             this.btnBrowseQuestionnaireFile = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -52,12 +55,10 @@
             this.txtPrimaryKeyFrom = new System.Windows.Forms.TextBox();
             this.btnCreateCases = new System.Windows.Forms.Button();
             this.lblQuestionnaireName = new System.Windows.Forms.Label();
-            this.lblServerPark = new System.Windows.Forms.Label();
             this.lblBlaiseConnectionSettings = new System.Windows.Forms.Label();
             this.btnInstallQuestionnaire = new System.Windows.Forms.Button();
             this.btnBrowseCaseFile = new System.Windows.Forms.Button();
             this.txtCaseFile = new System.Windows.Forms.TextBox();
-            this.drpServerPark = new System.Windows.Forms.ComboBox();
             this.drpQuestionnaireName = new System.Windows.Forms.ComboBox();
             this.btnCreateCasesFromFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -181,6 +182,17 @@
             this.txtPassword.TabIndex = 26;
             this.txtPassword.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             // 
+            // drpServerPark
+            // 
+            this.drpServerPark.DropDownWidth = 100;
+            this.drpServerPark.FormattingEnabled = true;
+            this.drpServerPark.Location = new System.Drawing.Point(118, 277);
+            this.drpServerPark.Margin = new System.Windows.Forms.Padding(4);
+            this.drpServerPark.Name = "drpServerPark";
+            this.drpServerPark.Size = new System.Drawing.Size(116, 24);
+            this.drpServerPark.TabIndex = 43;
+            this.drpServerPark.SelectedIndexChanged += new System.EventHandler(this.ServerParkDropDown_SelectedIndexChanged);
+            // 
             // lblPort
             // 
             this.lblPort.AutoSize = true;
@@ -240,6 +252,16 @@
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
             this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
+            // lblServerPark
+            // 
+            this.lblServerPark.AutoSize = true;
+            this.lblServerPark.Location = new System.Drawing.Point(18, 282);
+            this.lblServerPark.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblServerPark.Name = "lblServerPark";
+            this.lblServerPark.Size = new System.Drawing.Size(77, 16);
+            this.lblServerPark.TabIndex = 17;
+            this.lblServerPark.Text = "Server park";
             // 
             // txtQuestionnaireFile
             // 
@@ -325,16 +347,6 @@
             this.lblQuestionnaireName.Text = "Questionnaire";
             this.lblQuestionnaireName.Click += new System.EventHandler(this.lblQuestionnaireName_Click);
             // 
-            // lblServerPark
-            // 
-            this.lblServerPark.AutoSize = true;
-            this.lblServerPark.Location = new System.Drawing.Point(18, 282);
-            this.lblServerPark.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblServerPark.Name = "lblServerPark";
-            this.lblServerPark.Size = new System.Drawing.Size(77, 16);
-            this.lblServerPark.TabIndex = 17;
-            this.lblServerPark.Text = "Server park";
-            // 
             // lblBlaiseConnectionSettings
             // 
             this.lblBlaiseConnectionSettings.AutoSize = true;
@@ -375,17 +387,6 @@
             this.txtCaseFile.Name = "txtCaseFile";
             this.txtCaseFile.Size = new System.Drawing.Size(273, 22);
             this.txtCaseFile.TabIndex = 40;
-            // 
-            // drpServerPark
-            // 
-            this.drpServerPark.DropDownWidth = 100;
-            this.drpServerPark.FormattingEnabled = true;
-            this.drpServerPark.Location = new System.Drawing.Point(118, 277);
-            this.drpServerPark.Margin = new System.Windows.Forms.Padding(4);
-            this.drpServerPark.Name = "drpServerPark";
-            this.drpServerPark.Size = new System.Drawing.Size(116, 24);
-            this.drpServerPark.TabIndex = 43;
-            this.drpServerPark.SelectedIndexChanged += new System.EventHandler(this.ServerParkDropDown_SelectedIndexChanged);
             // 
             // drpQuestionnaireName
             // 
@@ -480,7 +481,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Blaise.Questionnaire.Data.Gui.Properties.Resources.background;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(460, 743);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -494,7 +495,7 @@
             this.Name = "BlaiseDataTool";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Blaise Questionnaire Data Tool";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.BlaiseDataTool_Load);
             this.grpConnectionDetails.ResumeLayout(false);
             this.grpConnectionDetails.PerformLayout();
