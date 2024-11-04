@@ -195,6 +195,9 @@
       <Name>Blaise.Instrument.Data.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
