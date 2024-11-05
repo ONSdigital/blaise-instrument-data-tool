@@ -5,6 +5,7 @@ using Blaise.Nuget.Api.Contracts.Models;
 using Blaise.Nuget.Api.Providers;
 using Blaise.Questionnaire.Data.Gui.Extensions;
 using Blaise.Questionnaire.Data.Helpers;
+using System.IO;
 
 namespace Blaise.Questionnaire.Data.Gui
 {
@@ -15,13 +16,14 @@ namespace Blaise.Questionnaire.Data.Gui
         public BlaiseDataTool()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             UpdateUIOnConnectionStatus(false);
         }
 
         private void BlaiseDataTool_Load(object sender, EventArgs e)
         {
-            txtPrimaryKeyFrom.Text = @"9001";
-            txtNumberOfCases.Text = @"10";
+            txtPrimaryKeyFrom.Text = "9001";
+            txtNumberOfCases.Text = "10";
             cboBinding.Items.AddRange(new object[] { "HTTP", "HTTPS" });
             cboBinding.SelectedIndex = 0;
             _connectionModel = GetConnectionModelFromConfig();
@@ -30,120 +32,7 @@ namespace Blaise.Questionnaire.Data.Gui
             txtPassword.Text = _connectionModel?.Password;
             txtPort.Text = _connectionModel?.Port.ToString();
             txtRemotePort.Text = _connectionModel?.RemotePort.ToString();
-            ConfigureBindingDropDown();
-        }
-
-        private void btnBrowseQuestionnaireFile_Click(object sender, EventArgs e)
-        {
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = "BPKG files (*.bpkg)|*.bpkg|ZIP files (*.zip)|*.zip";
-            var result = openFileDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                txtQuestionnaireFile.Text = openFileDialog.FileName;
-            }
-            else
-            {
-                MessageBox.Show(@"There was an error in selecting a file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void CreateInDatabaseButton_Click(object sender, EventArgs e)
-        {
-            var numberOfCases = txtNumberOfCases.GetNullableIntegerValue();
-            var primaryKeyValue = txtPrimaryKeyFrom.GetNullableIntegerValue();
-            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
-            var serverParkName = drpServerPark.SelectedItem?.ToString();
-
-            if (numberOfCases == null || primaryKeyValue == null || questionnaireName == null || serverParkName == null)
-            {
-                MessageBox.Show(@"There are some null or incorrect values", @"Create cases in database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverParkName, (int)primaryKeyValue);
-                MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                MessageBox.Show($"There was an error creating the cases - {exception.Message}", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void CreateFromSampleButton_Click(object sender, EventArgs e)
-        {
-            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
-            var serverParkName = drpServerPark.SelectedItem?.ToString();
-            var caseSampleFile = txtCaseFile.GetNullableStringValue();
-
-            if (caseSampleFile is null)
-            {
-                MessageBox.Show("No sample file was selected", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise(questionnaireName, serverParkName, caseSampleFile);
-                MessageBox.Show(@"Cases created successfully", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                MessageBox.Show($"There was an error creating the cases - {exception.Message}", @"Create cases", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void InstallQuestionnaireButton_Click(object sender, EventArgs e)
-        {
-            var questionnaireFile = txtQuestionnaireFile.GetNullableStringValue();
-            var questionnaireName = drpQuestionnaireName.SelectedItem?.ToString();
-            var serverParkName = drpServerPark.SelectedItem?.ToString();
-
-            if (questionnaireFile == null || questionnaireName == null || serverParkName == null)
-            {
-                MessageBox.Show(@"There are some null or incorrect values", @"Install questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            try
-            {
-                QuestionnaireHelper.GetInstance(_connectionModel).InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile);
-                MessageBox.Show(@"Installation successful", @"Install Questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                PopulateServerParkAndQuestionnaire();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                MessageBox.Show($"There was an error installing the questionnaire - {exception.Message}", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void BrowseCaseFileButton_Click(object sender, EventArgs e)
-        {
-            var result = openFileDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                txtCaseFile.Text = openFileDialog.FileName;
-            }
-            else
-            {
-                MessageBox.Show(@"There was an error in selecting a file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void RefreshQuestionnairesButton_Click(object sender, EventArgs e)
-        {
-            if (!TestBlaiseConnectionIsCorrect())
-            {
-                MessageBox.Show("There is an issue with the configuration", @"Refresh", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            PopulateServerParkAndQuestionnaire();
+            ConfigureBinding();
         }
 
         private ConnectionModel GetConnectionModelFromConfig()
@@ -164,7 +53,7 @@ namespace Blaise.Questionnaire.Data.Gui
             }
         }
 
-        private void ConfigureBindingDropDown()
+        private void ConfigureBinding()
         {
             foreach (var item in cboBinding.Items)
             {
@@ -177,18 +66,57 @@ namespace Blaise.Questionnaire.Data.Gui
             }
         }
 
-        private bool TestBlaiseConnectionIsCorrect()
+        private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (txtHostname.GetNullableStringValue() == null ||
-                txtUsername.GetNullableStringValue() == null ||
-                txtPassword.GetNullableStringValue() == null ||
-                txtPort.GetNullableIntegerValue() == null ||
-                txtRemotePort.GetNullableIntegerValue() == null)
+            Cursor = Cursors.WaitCursor;
+            try
             {
-                return false;
+                _connectionModel = new ConnectionModel();
+                _connectionModel.ServerName = txtHostname.Text;
+                _connectionModel.UserName = txtUsername.Text;
+                _connectionModel.Password = txtPassword.Text;
+                _connectionModel.Binding = cboBinding.Text;
+                _connectionModel.Port = int.Parse(txtPort.Text);
+                _connectionModel.RemotePort = int.Parse(txtRemotePort.Text);
+                PopulateServerParkAndQuestionnaire();                
+                if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
+                {
+                    UpdateUIOnConnectionStatus(true);
+                    MessageBox.Show("Connection successful", "Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                }
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Connection failed \n\n" + exception.Message, "Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
 
-            return ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful;
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            _connectionModel = null;            
+            cboServerPark.Items.Clear();
+            cboQuestionnaire.Items.Clear();
+            UpdateUIOnConnectionStatus(false);
+        }
+
+        private void UpdateUIOnConnectionStatus(bool isConnected)
+        {
+            btnConnect.Enabled = !isConnected;            
+            txtHostname.Enabled = !isConnected;
+            txtUsername.Enabled = !isConnected;
+            txtPassword.Enabled = !isConnected;
+            txtPort.Enabled = !isConnected;
+            txtRemotePort.Enabled = !isConnected;
+            cboBinding.Enabled = !isConnected;
+            cboServerPark.Enabled = isConnected;
+            cboQuestionnaire.Enabled = isConnected;
+            grpInstallQuestionnaire.Enabled = isConnected;
+            grpCreateCases.Enabled = isConnected;
+            btnDisconnect.Enabled = isConnected;
         }
 
         private void PopulateServerParkAndQuestionnaire()
@@ -197,98 +125,165 @@ namespace Blaise.Questionnaire.Data.Gui
             {
                 return;
             }
-
             var serverParks = ServerParkHelper.GetInstance(_connectionModel).GetServerParks();
-            drpServerPark.Items.Clear();
-            drpServerPark.Items.AddRange(serverParks.Cast<object>().ToArray());
-            drpServerPark.SelectedIndex = 0;
-
-            var serverParkName = drpServerPark.SelectedItem?.ToString();
+            cboServerPark.Items.Clear();
+            cboServerPark.Items.AddRange(serverParks.Cast<object>().ToArray());
+            cboServerPark.SelectedIndex = 0;
+            var serverParkName = cboServerPark.SelectedItem?.ToString();
             var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires(serverParkName).ToList();
             if (!questionnaires.Any())
             {
                 return;
             }
-
-            drpQuestionnaireName.Items.Clear();
-            drpQuestionnaireName.Items.AddRange(questionnaires.Cast<object>().ToArray());
-            drpQuestionnaireName.SelectedIndex = 0;
+            cboQuestionnaire.Items.Clear();
+            cboQuestionnaire.Items.AddRange(questionnaires.Cast<object>().ToArray());
+            cboQuestionnaire.SelectedIndex = 0;
         }
 
-
-        private void ServerParkDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboServerPark_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var serverParkName = drpServerPark.SelectedItem?.ToString();
+            var serverParkName = cboServerPark.SelectedItem?.ToString();
             var questionnaires = QuestionnaireHelper.GetInstance(_connectionModel).GetQuestionnaires(serverParkName).ToList();
             if (!questionnaires.Any())
             {
                 return;
             }
-
-            drpQuestionnaireName.Items.Clear();
-            drpQuestionnaireName.Items.AddRange(questionnaires.Cast<object>().ToArray());
-            drpQuestionnaireName.SelectedIndex = 0;
+            cboQuestionnaire.Items.Clear();
+            cboQuestionnaire.Items.AddRange(questionnaires.Cast<object>().ToArray());
+            cboQuestionnaire.SelectedIndex = 0;
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void btnBrowseQuestionnaireFile_Click(object sender, EventArgs e)
         {
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = "BPKG files (*.bpkg)|*.bpkg|ZIP files (*.zip)|*.zip";
+            var fileDialogResult = openFileDialog.ShowDialog();
+            if (fileDialogResult == DialogResult.OK)
+            {
+                txtQuestionnaireFile.Text = openFileDialog.FileName;
+            }
+            else if (fileDialogResult == DialogResult.Cancel)
+            {
+                txtQuestionnaireFile.Text = "";
+            }
+            else
+            {
+                MessageBox.Show(@"Error selecting file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnInstallQuestionnaire_Click(object sender, EventArgs e)
+        {
+            var questionnaireFile = txtQuestionnaireFile.GetNullableStringValue();
+            var questionnaireName = System.IO.Path.GetFileNameWithoutExtension(txtQuestionnaireFile.Text);
+            var serverPark = cboServerPark.SelectedItem?.ToString();
+            if (questionnaireFile == null)
+            {
+                MessageBox.Show("Please select a questionnaire package file", "Install questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            Cursor = Cursors.WaitCursor;
             try
             {
-                _connectionModel = new ConnectionModel(); // Ensure this is the correct initialization
-
-                _connectionModel.ServerName = txtHostname.Text;
-                _connectionModel.UserName = txtUsername.Text;
-                _connectionModel.Password = txtPassword.Text;
-                _connectionModel.Binding = cboBinding.Text;
-                _connectionModel.Port = int.Parse(txtPort.Text);
-                _connectionModel.RemotePort = int.Parse(txtRemotePort.Text);
-
+                QuestionnaireHelper.GetInstance(_connectionModel).InstallQuestionnaire(questionnaireName, serverPark, questionnaireFile);
                 PopulateServerParkAndQuestionnaire();
-                
-                
-                if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
-                {
-                    UpdateUIOnConnectionStatus(true);
-                    MessageBox.Show(@"Connection successful", @"Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Connection failed: Invalid connection details.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                txtQuestionnaireFile.Text = "";
+                System.Media.SystemSounds.Beep.Play();
+                this.Activate();
+                MessageBox.Show("Install successful", "Install questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Connection failed: " + ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(exception);
+                MessageBox.Show("Install questionnaire failed \n\n" + exception.Message, "Install questionnaire", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
-        private void btnDisconnect_Click(object sender, EventArgs e)
+        private void btnCreateCases_Click(object sender, EventArgs e)
         {
-            _connectionModel = null;            
-            drpServerPark.Items.Clear();
-            drpQuestionnaireName.Items.Clear();
-            UpdateUIOnConnectionStatus(false);
+            var numberOfCases = txtNumberOfCases.GetNullableIntegerValue();
+            var primaryKeyFrom = txtPrimaryKeyFrom.GetNullableIntegerValue();
+            var questionnaireName = cboQuestionnaire.SelectedItem?.ToString();
+            var serverPark = cboServerPark.SelectedItem?.ToString();
+            if (numberOfCases == null || primaryKeyFrom == null)
+            {
+                MessageBox.Show("Please provide primary key from and number of cases", "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise((int)numberOfCases, questionnaireName, serverPark, (int)primaryKeyFrom);
+                System.Media.SystemSounds.Beep.Play();
+                this.Activate();
+                MessageBox.Show("Created cases successfully", "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Create cases failed \n\n" + exception.Message, "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
-        private void UpdateUIOnConnectionStatus(bool isConnected)
+        private void btnBrowseCaseFile_Click(object sender, EventArgs e)
         {
-            btnConnect.Enabled = !isConnected;
-            
-            txtHostname.Enabled = !isConnected;
-            txtUsername.Enabled = !isConnected;
-            txtPassword.Enabled = !isConnected;
-            txtPort.Enabled = !isConnected;
-            txtRemotePort.Enabled = !isConnected;
-            cboBinding.Enabled = !isConnected;
-            drpServerPark.Enabled = isConnected;
-            drpQuestionnaireName.Enabled = isConnected;
-            grpInstallQuestionnaire.Enabled = isConnected;
-            grpCreateCases.Enabled = isConnected;
-            btnDisconnect.Enabled = isConnected;
-
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = "JSON files (*.json)|*.json";
+            var caseFilesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Blaise.Questionnaire.Data.Helpers\CaseFiles");
+            // to do - fix ^
+            if (Directory.Exists(caseFilesDirectory))
+            {
+                openFileDialog.InitialDirectory = caseFilesDirectory;
+            }
+            var fileDialogResult = openFileDialog.ShowDialog();
+            if (fileDialogResult == DialogResult.OK)
+            {
+                txtCaseFile.Text = openFileDialog.FileName;
+            }
+            else if (fileDialogResult == DialogResult.Cancel)
+            {
+                txtCaseFile.Text = "";
+            }
+            else
+            {
+                MessageBox.Show(@"Error selecting file", @"File selector", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-
+        private void btnCreateCasesFromFile_Click(object sender, EventArgs e)
+        {
+            var questionnaireName = cboQuestionnaire.SelectedItem?.ToString();
+            var serverPark = cboServerPark.SelectedItem?.ToString();
+            var caseFile = txtCaseFile.GetNullableStringValue();
+            if (caseFile is null)
+            {
+                MessageBox.Show("Please select a case JSON file", "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                CaseHelper.GetInstance(_connectionModel).CreateCasesInBlaise(questionnaireName, serverPark, caseFile);
+                System.Media.SystemSounds.Beep.Play();
+                this.Activate();
+                MessageBox.Show("Created cases successfully", "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                MessageBox.Show("Create cases failed \n\n" + exception.Message, "Create cases", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
     }
 }

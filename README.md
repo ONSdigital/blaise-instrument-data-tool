@@ -1,32 +1,44 @@
 
 # Blaise Questionnaire Data Tool
 
-A Windows Forms UI based tool to make it easier to load data into a Blaise questionnaire that's deployed into our cloud based environment.
+A Windows Forms-based tool designed to simplify loading data into a Blaise questionnaire in our cloud-based environment.
+
+## Git
+
+**Never commit your `App.config` file with connection details.** To prevent sensitive information from being added to Git, you can use the following command to add all files while ignoring the `App.config` file:
+
+```bash
+git add . ':!Blaise.Questionnaire.Data.Gui/App.config'
+```
 
 ## Setup
 
-Blaise only provides a .NET Framework API, so Visual Studio on Windows is highly recommended.
+**Note:** This tool requires Visual Studio on Windows due to the .NET Framework-based Blaise API.
 
-The Blaise API is not on the global NuGet gallery, we host it in our private Azure DevOps NuGet feed.
+The Blaise API is hosted on a private NuGet feed in our Azure DevOps repository, so you’ll need to set this up manually in Visual Studio.
 
-You'll need to add our Azure DevOps NuGet feed to Visual Studio and put your PAT details into your NuGet configuration file.
+### Adding the Azure DevOps NuGet Feed
 
-To add the feed in Visual Studio:
+To access the Blaise API, add our Azure DevOps NuGet feed in Visual Studio:
 
-* Menu navigation - Tools > Options > NuGet Package Manager > Package Sources
-* Press the plus button to add a new source
-* Enter a name and put in the source feed URL - `https://pkgs.dev.azure.com/<ORG>/<PROJ>/_packaging/<FEED>/nuget/v3/index.json`
+1. Go to Tools > Options > NuGet Package Manager > Package Sources.
+1. Click the Add (+) button to add a new source.
+1. Enter a name for the source and the feed URL:
+```
+https://pkgs.dev.azure.com/<ORG>/<PROJ>/_packaging/<FEED>/nuget/v3/index.json
+```
 
-To put your PAT details into your NuGet configuration file:
+Replace `<ORG>`, `<PROJ>`, and `<FEED>` with the appropriate values.
 
-Open your NuGet configuration file by running:
+### Configuring Your NuGet Personal Access Token (PAT)
 
+To authenticate with the NuGet feed, you’ll need to add your PAT to your NuGet configuration file:
+
+1. Open your NuGet configuration file:
 ```
 %appdata%\NuGet\NuGet.Config
 ```
-
-Add the following to the file:
-
+2. Add the following section:
 ```
 <packageSourceCredentials>
    <<SOURCE_NAME>>
@@ -36,15 +48,20 @@ Add the following to the file:
 </packageSourceCredentials>
 ```
 
+Replace `<SOURCE_NAME>`, `<USERNAME>`, and `<PAT>` with the appropriate values.
+
 ## Usage
 
-* Start the application in Visual Studio to launch the Windows Forms UI.
-* Enter the Blaise connection details in the fields provided.
-* Click the Refresh button and the available server parks and questionnaires should be populated.
-* Select the desired server park and questionnaire.
-* Set the start primary key and how many cases you would like created.
-* Click the Create button to start creating cases.
+1. Launch the application in Visual Studio to open the Windows Forms UI.
+1. Enter your Blaise connection details in the provided fields and click Connect.
+1. Select your desired server park and questionnaire.
+1. Specify the start primary key and the number of cases you wish to create.
+1. Click Create to generate cases.
 
 The cases will be populated with dummy sample data, see the `CaseDataModel.cs` file.
 
-Cases can also be created from a JSON file, this allows you to populate any fields you like, see the `SampleCases` folder for some examples.
+Cases can also be created from a JSON file, this allows you to populate any fields you like, see the `CaseFiles` folder for some examples.
+
+If a field does not exist in the questionnaire, the tool will skip it without causing errors.
+
+**Important:** Existing case data is cleared each time new data is loaded.
