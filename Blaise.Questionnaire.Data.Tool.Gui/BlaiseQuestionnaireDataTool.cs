@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using Blaise.Nuget.Api.Contracts.Models;
+﻿using Blaise.Nuget.Api.Contracts.Models;
 using Blaise.Nuget.Api.Providers;
 using Blaise.Questionnaire.Data.Tool.Gui.Extensions;
 using Blaise.Questionnaire.Data.Tool.Helpers;
+using System;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Blaise.Questionnaire.Data.Tool.Gui
 {
@@ -78,11 +78,11 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
                 _connectionModel.Binding = cboBinding.Text;
                 _connectionModel.Port = int.Parse(txtPort.Text);
                 _connectionModel.RemotePort = int.Parse(txtRemotePort.Text);
-                PopulateServerParkAndQuestionnaire();                
+                PopulateServerParkAndQuestionnaire();
                 if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
                 {
                     UpdateUIOnConnectionStatus(true);
-                    MessageBox.Show("Connection successful", "Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    MessageBox.Show("Connection successful", "Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception exception)
@@ -97,7 +97,7 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
 
         private void btnDisconnect_Click(object sender, EventArgs e)
         {
-            _connectionModel = null;            
+            _connectionModel = null;
             cboServerPark.Items.Clear();
             cboQuestionnaire.Items.Clear();
             UpdateUIOnConnectionStatus(false);
@@ -105,7 +105,7 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
 
         private void UpdateUIOnConnectionStatus(bool isConnected)
         {
-            btnConnect.Enabled = !isConnected;            
+            btnConnect.Enabled = !isConnected;
             txtHostname.Enabled = !isConnected;
             txtUsername.Enabled = !isConnected;
             txtPassword.Enabled = !isConnected;
