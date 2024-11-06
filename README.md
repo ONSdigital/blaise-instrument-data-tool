@@ -1,11 +1,10 @@
-
 # Blaise Questionnaire Data Tool
 
 A Windows Forms-based tool designed to simplify loading data into a Blaise questionnaire in our cloud-based environment.
 
 ## Git
 
-**Never commit your `App.config` file with connection details.** To prevent sensitive information from being added to Git, you can use the following command to add all files while ignoring the `App.config` file:
+**Never commit your `App.config` file with actual connection details.** To prevent sensitive information from being added to Git, you can use the following command to add all files while ignoring the `App.config` file:
 
 ```bash
 git add . ':!Blaise.Questionnaire.Data.Tool.Gui/App.config'
@@ -54,14 +53,16 @@ Replace `<SOURCE_NAME>`, `<USERNAME>`, and `<PAT>` with the appropriate values.
 
 1. Launch the application in Visual Studio to open the Windows Forms UI.
 1. Enter your Blaise connection details in the provided fields and click Connect.
+   - You can either use our Nginx reverse proxy or open tunnels to the management VM and use localhost.
+   - Note that the GCP HTTPS proxy will not work.
 1. Select your desired server park and questionnaire.
 1. Specify the start primary key and the number of cases you wish to create.
 1. Click Create to generate cases.
 
-The cases will be populated with dummy sample data, see the `CaseDataModel.cs` file.
+The cases will be populated with dummy sample data. The `CaseDataModel.cs` file will show you what will be attempted to be populated in the data.
 
-Cases can also be created from a JSON file, this allows you to populate any fields you like, see the `CaseFiles` folder for some examples.
+Cases can also be created from a JSON file, allowing you to populate any fields you like. The `CaseFiles` folder contains examples and common scenarios. Please remember to commit any useful JSON files you may create for future use.
 
-If a field does not exist in the questionnaire, the tool will skip it without causing errors.
+If a field does not exist in the questionnaire, the tool will skip over it without causing errors.
 
 **Important:** Existing case data is cleared each time new data is loaded.
