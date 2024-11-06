@@ -17,7 +17,7 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            UpdateUIOnConnectionStatus(false);
+            ToggleControlsByConnectionState(false);
         }
 
         private void BlaiseQuestionnaireDataTool_Load(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
                 PopulateServerParkAndQuestionnaire();
                 if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
                 {
-                    UpdateUIOnConnectionStatus(true);
+                    ToggleControlsByConnectionState(true);
                     MessageBox.Show("Connection successful", "Connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -100,10 +100,10 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
             _connectionModel = null;
             cboServerPark.Items.Clear();
             cboQuestionnaire.Items.Clear();
-            UpdateUIOnConnectionStatus(false);
+            ToggleControlsByConnectionState(false);
         }
 
-        private void UpdateUIOnConnectionStatus(bool isConnected)
+        private void ToggleControlsByConnectionState(bool isConnected)
         {
             btnConnect.Enabled = !isConnected;
             txtHostname.Enabled = !isConnected;
