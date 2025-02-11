@@ -71,13 +71,15 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
             Cursor = Cursors.WaitCursor;
             try
             {
-                _connectionModel = new ConnectionModel();
-                _connectionModel.ServerName = txtHostname.Text;
-                _connectionModel.UserName = txtUsername.Text;
-                _connectionModel.Password = txtPassword.Text;
-                _connectionModel.Binding = cboBinding.Text;
-                _connectionModel.Port = int.Parse(txtPort.Text);
-                _connectionModel.RemotePort = int.Parse(txtRemotePort.Text);
+                _connectionModel = new ConnectionModel
+                {
+                    ServerName = txtHostname.Text,
+                    UserName = txtUsername.Text,
+                    Password = txtPassword.Text,
+                    Binding = cboBinding.Text,
+                    Port = int.Parse(txtPort.Text),
+                    RemotePort = int.Parse(txtRemotePort.Text)
+                };
                 PopulateServerParkAndQuestionnaire();
                 if (ConnectionHelper.GetInstance(_connectionModel).ConnectionSuccessful)
                 {
@@ -175,7 +177,7 @@ namespace Blaise.Questionnaire.Data.Tool.Gui
         private void btnInstallQuestionnaire_Click(object sender, EventArgs e)
         {
             var questionnaireFile = txtQuestionnaireFile.GetNullableStringValue();
-            var questionnaireName = System.IO.Path.GetFileNameWithoutExtension(txtQuestionnaireFile.Text);
+            var questionnaireName = Path.GetFileNameWithoutExtension(txtQuestionnaireFile.Text);
             var serverPark = cboServerPark.SelectedItem?.ToString();
             if (questionnaireFile == null)
             {

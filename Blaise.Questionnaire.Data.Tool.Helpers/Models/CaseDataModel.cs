@@ -14,7 +14,11 @@ namespace Blaise.Questionnaire.Data.Tool.Helpers.Models
 
         public CaseModel ToCaseModel()
         {
-            return new CaseModel(PrimaryKey, DataFields);
+            var primaryKeyValues = new Dictionary<string, string>
+            {
+                { "QID.Serial_Number", PrimaryKey }
+            };
+            return new CaseModel(primaryKeyValues, DataFields);
         }
 
         public Dictionary<string, string> InitialiseCaseDataFields(Dictionary<string, string> dataFields)

@@ -18,10 +18,5 @@ namespace Blaise.Questionnaire.Data.Tool.Gui.Extensions
         {
             return string.IsNullOrWhiteSpace(textBox.Text) ? null : textBox.Text;
         }
-
-        public static string GetNullableStringValue(this ComboBox comboBox)
-        {
-            return string.IsNullOrWhiteSpace(comboBox.Text) ? null : comboBox.Text;
-        }
     }
 }
