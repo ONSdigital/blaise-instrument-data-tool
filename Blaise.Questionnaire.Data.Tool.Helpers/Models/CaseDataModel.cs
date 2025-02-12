@@ -6,13 +6,13 @@ namespace Blaise.Questionnaire.Data.Tool.Helpers.Models
 {
     public class CaseDataModel
     {
-        public CaseDataModel(int primaryKey, Dictionary<string, string> sampleDataFields = null)
+        public CaseDataModel(int primaryKey, Dictionary<string, string> dataFields = null)
         {
             PrimaryKey = primaryKey.ToString();
-            DataFields = InitialiseCaseDataFields(sampleDataFields);
+            DataFields = InitialiseCaseDataFields(dataFields);
         }
 
-        public CaseModel ToCaseModel()
+        public CaseModel CaseModel()
         {
             var primaryKeyValues = new Dictionary<string, string>
             {
@@ -26,8 +26,8 @@ namespace Blaise.Questionnaire.Data.Tool.Helpers.Models
             if (dataFields == null)
             {
                 dataFields = new Dictionary<string, string>();
-                // Add default values only if no sample data is provided
-                AddDefaultValues(dataFields);
+                // Add default data if no file is provided
+                AddDefaultData(dataFields);
             }
             else
             {
@@ -38,7 +38,7 @@ namespace Blaise.Questionnaire.Data.Tool.Helpers.Models
             return dataFields;
         }
 
-        private void AddDefaultValues(Dictionary<string, string> dataFields)
+        private void AddDefaultData(Dictionary<string, string> dataFields)
         {
             dataFields["qid.serial_number"] = PrimaryKey;
             dataFields["qdatabag.tla"] = "tla";
